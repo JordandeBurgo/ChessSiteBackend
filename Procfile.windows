@@ -1,1 +1,1 @@
-web: python ./ChessApp/app.py runserver 127.0.0.1:7000
+web: python ./ChessApp/run.py runserver 127.0.0.1:5000
