@@ -1,1 +1,1 @@
-web: gunicorn ChessApp.app:create_app
+web: gunicorn ChessApp.run:app
