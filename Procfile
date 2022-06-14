@@ -1,1 +1,1 @@
-web: gunicorn -k flask_sockets.worker ChessApp:app
+web: gunicorn --worker-class eventlet -w 1 ChessApp:app
