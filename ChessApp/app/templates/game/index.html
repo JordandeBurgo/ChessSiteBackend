@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <h1>{% block title %}Chess{% endblock title %}</h1>
+{% endblock header %}
+
+{% block content %}
+    <body>
+        <div id="FenInDiv">
+            Fen:<br/>
+            <input type="text" id="fenIn"/>		
+            <button type="button" id="SetFen">Set Position</button>	
+        </div>
+        <div class="container">	
+            <div class="upperdiv">
+                <div class="numbers"></div>
+                <div class="letters"></div>
+            </div>
+            <div class="board">
+            </div>
+        </div>
+        <div class="button-div">
+            <div class="buttons">
+                <button class="button" onclick="ResetBoardGUI()">Reset</button>
+                <button class="button" onclick="TakeMoveGUI()">Undo</button>
+            </div>
+        </div>
+
+    
+        <script src="/static/jquery-3.6.0.min.js"></script>
+        <script src="/static/pieces.js"></script>
+        <script src="/static/new_defs.js"></script>
+        <script src="/static/new_board.js"></script>
+        <script src="/static/new_movegen.js"></script>
+        <script src="/static/new_makemove.js"></script>
+        <script src="/static/performance_test.js"></script>
+        <script src="/static/new_gui_communication.js"></script>
+        <script src="/static/new_main.js"></script>
+        <script src="/static/app.js"></script>
+        <script src="/static/bot.js"></script>
+        <script>
+            var ignoreClickOnMeElement = document.getElementsByClassName('board')[0];
+            var ignoreClickOnMeElement2 = document.getElementsByClassName('buttons')[0];
+            document.addEventListener('click', function(event) {
+                var isClickInsideElement = ignoreClickOnMeElement.contains(event.target);
+                var isClickInsideElement2 = ignoreClickOnMeElement2.contains(event.target);
+                if (!isClickInsideElement && !isClickInsideElement2) {
+                    active = document.getElementsByClassName("active")
+                    if (active.length === 1)
+                        active[0].classList.remove("active");
+                    activeSquares = document.getElementsByClassName("possibleMove");
+                    let i = 0;
+                    while (i < activeSquares.length) {
+                        activeSquares[i].classList.remove("possibleMove");
+                    }
+                    try{
+                        if(promotion){
+                            promotion = false;
+                            menu = document.getElementById("dropdown");
+                            menu.parentNode.removeChild(menu);
+                        }
+                    }
+                    catch(e) {
+                        console.log(e);
+                    }
+                }
+                else if (!isClickInsideElement && promotion){
+                    active = document.getElementsByClassName("active")
+                    if (active.length === 1)
+                        active[0].classList.remove("active");
+                    activeSquares = document.getElementsByClassName("possibleMove");
+                    let i = 0;
+                    while (i < activeSquares.length) {
+                        activeSquares[i].classList.remove("possibleMove");
+                    }
+                    try{
+                        if(promotion){
+                            promotion = false;
+                            menu = document.getElementById("dropdown");
+                            menu.parentNode.removeChild(menu);
+                        }
+                    }
+                    catch(e) {
+                        console.log(e);
+                    }
+                }
+            });
+        </script>
+    </body>
+{% endblock content %}

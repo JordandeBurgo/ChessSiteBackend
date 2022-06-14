@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <h1>{% block title %}Chess{% endblock title %}</h1>
+{% endblock header %}
+
+{% block content %}
+    <body>
+        <div class="container">	
+            <div class="upperdiv">
+                <div class="numbers"></div>
+                <div class="letters"></div>
+            </div>
+            <div class="board">
+            </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
+        <script src="/static/jquery-3.6.0.min.js"></script>
+        <script src="/static/socket_definition.js"></script>
+        <script src="/static/pieces.js"></script>
+        <script src="/static/new_defs.js"></script>
+        <script src="/static/new_board.js"></script>
+        <script src="/static/new_movegen.js"></script>
+        <script src="/static/new_makemove.js"></script>
+        <script src="/static/performance_test.js"></script>
+        <script src="/static/server_gui_communication.js"></script>
+        <script src="/static/new_main.js"></script>
+        <script src="/static/app.js"></script>
+        <script src="/static/bot.js"></script>
+    </body>
+{% endblock content %}

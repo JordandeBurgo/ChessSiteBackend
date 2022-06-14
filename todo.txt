@@ -1,0 +1,44 @@
+Make sure that the correct user is moving
+
+Make sure that the move from the client is valid on the server
+
+Make the user leave the room at the end of the game - add a forfeit button
+
+Make it so that a room name becomes the link for the room
+    - This is instead of all rooms being in "/game" and rooms being stored only in session data
+    - Using this link people should be able to join as spectators - even not logged in
+    - Might be able to do this with "/<int:id>" or something? That may only be for ints may like 
+      "/<roomname>" or something of that sort
+
+Make it so that the game state is stored on the server for the room, and that refreshing
+the page makes it so that you get back the same game, rather than it resetting on one of
+the clients as this causes errors anyway
+    - Probably need to define a way to parse the board to create an fen and store that fen in a
+      database or maybe even in a variable where the key is the room name, then use the fen of
+      the room to call the NewGame function to get the board right, seems like the simplest way to
+      do it to me atm
+
+Add menu that allows you to choose "Local v Human, Local v Bot, or Online Human v Human"
+    - The bot doesnt exist yet but that's a plan for the future
+
+Add game timer - and the ability to choose time control on creating a game
+
+Make it so that there is a list of online users
+    - Ability to add friends
+    - Ability to challenge other online users
+    - Ability to view challenges
+
+Make it so challenges create random rooms rather than the user choosing a room name
+
+Confirm email address for signup
+
+ASK CODY: Could I emit a move to the other client and ask the other client if the move was legal
+          before commiting the move, would this be enough? Or does it need to be checked server side?
+          As this saves a lot of code and brain power XD
+          Potential problem: If a user figures out how to do a move for the other person, it will be "legal"
+                             on both client sides but not actually allowed
+          
+ASK CODY: Is the only difference between storing something in a vairbale on the server and in a database
+          that the database will still be there if the server goes off? Is this something I need to
+          worry about when thinking about storing fen strings of the board state or of what side the
+          players are on, could that be just in a vairbale or would that do something weird?
