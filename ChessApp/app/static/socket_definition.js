@@ -1,6 +1,6 @@
 var socket;
 $(document).ready(function(){
-    socket = io.connect();
+    socket = io();
     console.log(socket);
     socket.on('connect', function() {
         console.log("CONNECTING...")
