@@ -22,7 +22,7 @@ def register():
             error = 'Password is required.'
         
         if error is None:
-            setuser = r.setnx(email, generate_password_hash(password))
+            setuser = r.setnx(email, generate_password_hash(password).encode('utf-8'))
             if setuser == 0:
                 print("BYE")
                 error = f"User {email} is already registered."
@@ -42,7 +42,7 @@ def login():
         print(user_password)
         if user_password is None:
             error = 'Incorrect email.'
-        elif not check_password_hash(user_password, password):
+        elif not check_password_hash(user_password.decode('utf-8'), password):
             error = 'Incorrect password.'
 
         if error is None:
