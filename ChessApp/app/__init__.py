@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 from flask_session import Session
 from flask_cors import CORS
 
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO(cors_allowed_origins="*", async_mode='gevent')
 
 def create_app(test_config=None):
     app = Flask(__name__)
