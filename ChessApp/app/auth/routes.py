@@ -38,16 +38,15 @@ def login():
         email = request.form['email']
         password = request.form['password']
         error = None
-        user = r.get(email)
-        if user is None:
+        user_password = r.get(email)
+        if user_password is None:
             error = 'Incorrect email.'
-        elif not check_password_hash(user['password'], password):
+        elif not check_password_hash(user_password, password):
             error = 'Incorrect password.'
 
         if error is None:
             session.clear()     
             session['username'] = email
-            session['user_id'] = user['id']
             return redirect(url_for('index'))
         flash(error)
     return render_template('auth/login.html')
