@@ -23,7 +23,7 @@ def register():
         
         if error is None:
             user_info = {"username": email, "password": generate_password_hash(password).encode('utf-8')}
-            setuser = r.hsetnx(email, user_info)
+            setuser = r.hsetnx(email, "users", user_info)
             if setuser == 0:
                 print("BYE")
                 error = f"User {email} is already registered."
