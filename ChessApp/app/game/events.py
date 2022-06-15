@@ -6,6 +6,7 @@ from .. import socketio
 def join(msg):
     room = session.get('room')
     join_room(room)
+    print("SOMEONE JOINED THE ROOM")
     #                              0        1         -1
     #emit whether this player is white or black or spectator
     #also save this to session data ( delete at end of game with session.pop('variable_name') )
@@ -16,6 +17,7 @@ def join(msg):
 
 @socketio.on('moved', namespace='/game')
 def moved(move):
+    print("SOMEONE MOVED")
     room = session.get('room')
     print(move['move'])
     #todo: check if the move is legal
