@@ -14,7 +14,6 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        print("HELLO1")
         error = None
 
         if not email:
@@ -23,14 +22,13 @@ def register():
             error = 'Password is required.'
         
         if error is None:
-            print("HELLO3")
             setuser = r.setnx(email, generate_password_hash(password))
-            print("HELLO4")
             if setuser == 0:
+                print("BYE")
                 error = f"User {email} is already registered."
             else:
+                print("HELLO")
                 redirect(url_for('auth.login'))
-        
         flash(error)
     return render_template('auth/register.html')
 
