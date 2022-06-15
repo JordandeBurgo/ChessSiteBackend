@@ -37,9 +37,8 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        db = get_db()
         error = None
-        user = db.execute('SELECT * FROM user WHERE email = ?', (email,)).fetchone()
+        user = r.get(email)
         if user is None:
             error = 'Incorrect email.'
         elif not check_password_hash(user['password'], password):
