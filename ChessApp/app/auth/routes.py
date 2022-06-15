@@ -22,6 +22,8 @@ def register():
             setuser = r_db.setnx(email, generate_password_hash(password))
             if setuser == 0:
                 error = f"User {email} is already registered."
+            else:
+                redirect(url_for('auth.login'))
         
         flash(error)
     return render_template('auth/register.html')
