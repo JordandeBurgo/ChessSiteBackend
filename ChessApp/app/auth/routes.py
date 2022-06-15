@@ -23,7 +23,7 @@ def register():
             error = 'Password is required.'
         
         if error is None:
-            user_info = {"username": email, "password": generate_password_hash(password).encode('utf-8')}
+            user_info = {"username": email, "password": generate_password_hash(password)}
             setuser = r.setnx(email, json.dumps(user_info))
             if setuser == 0:
                 print("BYE")
@@ -61,7 +61,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = json.loads(r.get(user_id).decode("utf-8"))
+        g.user = json.loads(r.get(user_id))
 
 @auth.route('/logout')
 def logout():
