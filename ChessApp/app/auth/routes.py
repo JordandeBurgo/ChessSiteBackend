@@ -1,9 +1,14 @@
 from . import auth
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
+from urllib.parse import urlparse
+import redis
+import os
 
-from ..redis import get_r
 from ..db import get_db
+
+url = urlparse(os.environ.get("REDIS_URL"))
+r = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
 
 @auth.route('/register', methods=('GET', 'POST'))
 def register():
@@ -11,8 +16,6 @@ def register():
         email = request.form['email']
         password = request.form['password']
         print("HELLO1")
-        r_db = get_r()
-        print("HELLO2")
         error = None
 
         if not email:
@@ -22,7 +25,7 @@ def register():
         
         if error is None:
             print("HELLO3")
-            setuser = r_db.setnx(email, generate_password_hash(password))
+            setuser = r.setnx(email, generate_password_hash(password))
             print("HELLO4")
             if setuser == 0:
                 error = f"User {email} is already registered."
