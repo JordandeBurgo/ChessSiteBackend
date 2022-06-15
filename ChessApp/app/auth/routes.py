@@ -61,7 +61,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = json.loads(r.get(user_id))
+        g.user = json.loads(r.get(user_id).decode("utf-8"))
 
 @auth.route('/logout')
 def logout():
