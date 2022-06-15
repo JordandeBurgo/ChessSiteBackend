@@ -39,6 +39,7 @@ def login():
         password = request.form['password']
         error = None
         user_password = r.get(email)
+        print(user_password)
         if user_password is None:
             error = 'Incorrect email.'
         elif not check_password_hash(user_password, password):
