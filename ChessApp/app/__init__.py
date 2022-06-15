@@ -19,10 +19,6 @@ def create_app(test_config=None):
         app.config.from_pyfile('config.py', silent=True)
     else:
         app.config.from_mapping(test_config)
-    
-    from . import redis
-
-    r = redis.init_r()
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
