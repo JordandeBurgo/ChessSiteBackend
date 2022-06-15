@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from urllib.parse import urlparse
 import redis
 import os
+import json
 
 from ..db import get_db
 
@@ -23,7 +24,7 @@ def register():
         
         if error is None:
             user_info = {"username": email, "password": generate_password_hash(password).encode('utf-8')}
-            setuser = r.hsetnx(email, "users", user_info)
+            setuser = r.setnx(email, json.dumps(user_info))
             if setuser == 0:
                 print("BYE")
                 error = f"User {email} is already registered."
@@ -39,7 +40,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         error = None
-        user = r.hgetall(email)
+        user = json.loads(r.get(email))
         print(user)
         if user is None:
             error = 'Incorrect email.'
@@ -60,7 +61,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = r.hgetall(user_id)
+        g.user = json.loads(r.get(user_id))
 
 @auth.route('/logout')
 def logout():
