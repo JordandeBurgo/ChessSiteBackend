@@ -10,7 +10,9 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        print("HELLO1")
         r_db = get_r()
+        print("HELLO2")
         error = None
 
         if not email:
@@ -19,7 +21,9 @@ def register():
             error = 'Password is required.'
         
         if error is None:
+            print("HELLO3")
             setuser = r_db.setnx(email, generate_password_hash(password))
+            print("HELLO4")
             if setuser == 0:
                 error = f"User {email} is already registered."
             else:
