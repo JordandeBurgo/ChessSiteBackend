@@ -22,7 +22,7 @@ def register():
             error = 'Password is required.'
         
         if error is None:
-            setuser = r.setnx(email, generate_password_hash(password).encode('utf-8'))
+            setuser = r.hsetnx(email, {"username": email, "password": generate_password_hash(password).encode('utf-8')})
             if setuser == 0:
                 print("BYE")
                 error = f"User {email} is already registered."
@@ -38,11 +38,11 @@ def login():
         email = request.form['email']
         password = request.form['password']
         error = None
-        user_password = r.get(email)
-        print(user_password)
-        if user_password is None:
+        user = r.hgetall(email)
+        print(user)
+        if user is None:
             error = 'Incorrect email.'
-        elif not check_password_hash(user_password.decode('utf-8'), password):
+        elif not check_password_hash(user['password'].decode('utf-8'), password):
             error = 'Incorrect password.'
 
         if error is None:
@@ -54,12 +54,12 @@ def login():
 
 @auth.before_app_request
 def load_logged_in_user():
-    user_id = session.get('user_id')
+    user_id = session.get('username')
 
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db().execute('SELECT * FROM user WHERE id = ?', (user_id,)).fetchone()
+        g.user = r.hgetall(user_id)
 
 @auth.route('/logout')
 def logout():
