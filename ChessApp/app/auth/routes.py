@@ -7,8 +7,7 @@ import os
 
 from ..db import get_db
 
-url = urlparse(os.environ.get("REDIS_URL"))
-r = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
+r = redis.from_url(os.environ['REDISCLOUD_URL'])
 
 @auth.route('/register', methods=('GET', 'POST'))
 def register():

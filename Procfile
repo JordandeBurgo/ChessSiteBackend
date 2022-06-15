@@ -1,1 +1,1 @@
-web: gunicorn ChessApp.run:app
+web: gunicorn ChessApp.run:app --log-file -
