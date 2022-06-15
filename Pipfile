@@ -27,6 +27,7 @@ werkzeug = "==2.1.2"
 zipp = "==3.8.0"
 redis = "*"
 gevent = "*"
+gevent-websocket = "*"
 
 [dev-packages]
 
