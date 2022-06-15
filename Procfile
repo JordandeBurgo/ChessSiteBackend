@@ -1,1 +1,1 @@
-web: gunicorn --worker-class eventlet -w 1 ChessApp.run:app --log-file -
+web: gunicorn -k gevent -w 1 ChessApp.run:app --log-file -
