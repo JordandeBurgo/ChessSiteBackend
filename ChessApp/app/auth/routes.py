@@ -2,6 +2,7 @@ from . import auth
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from ..redis import get_r
 from ..db import get_db
 
 @auth.route('/register', methods=('GET', 'POST'))
@@ -9,7 +10,7 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        db = get_db()
+        r_db = get_r()
         error = None
 
         if not email:
@@ -18,13 +19,9 @@ def register():
             error = 'Password is required.'
         
         if error is None:
-            try:
-               db.execute("INSERT INTO user (email, password) VALUES (?, ?)", (email, generate_password_hash(password)),)
-               db.commit() 
-            except db.IntegrityError:
+            setuser = r_db.setnx(email, generate_password_hash(password))
+            if setuser == 0:
                 error = f"User {email} is already registered."
-            else:
-                return redirect(url_for('auth.login'))
         
         flash(error)
     return render_template('auth/register.html')

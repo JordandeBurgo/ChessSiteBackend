@@ -8,7 +8,6 @@ socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.config.from_mapping(SECRET_KEY = 'dev', DATABASE = os.path.join(app.instance_path, 'flaskr.sqlite'))
     app.debug = True
     app.config['SECRET_KEY'] = 'secret'
     app.config['SESSION_TYPE'] = 'filesystem'
@@ -21,14 +20,9 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
     
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
+    from . import redis
 
-    from . import db
-    
-    db.init_app(app)
+    r = redis.init_r()
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
