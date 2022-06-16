@@ -111,7 +111,7 @@ function ClickedSquare(sq){
         }
         else {
             if(parsed != NOMOVE){
-                socket.emit('moved', {'move': parsed});
+                socket.emit('moved', {'move': parsed, 'board': GenerateFen()});
             }
             UserMove.from = SQUARES.NO_SQ;
             UserMove.to = SQUARES.NO_SQ;
