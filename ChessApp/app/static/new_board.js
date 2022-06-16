@@ -318,7 +318,7 @@ function ParseFen(fen) {
 function GenerateFen(){
 	var rank = RANKS.RANK_8;
     var file = FILES.FILE_A;
-    var count = 0;
+    var count = 1;
 	var sq120 = 0;
 	var fen = "";
 	var fenChar = '';
@@ -328,9 +328,9 @@ function GenerateFen(){
 		fenChar = PceChar[GameBoard.pieces[sq120]];
 		console.log(fenChar);
 		if (fenChar != '.'){
-			if(count > 0){
+			if(count > 1){
 				fen = fen.concat(count.toString());
-				count = 0;
+				count = 1;
 			}
 			fen = fen.concat(fenChar);
 		}
@@ -341,9 +341,9 @@ function GenerateFen(){
 		if(file == FILES.FILE_H){
 			file = FILES.FILE_A;
 			rank--;
-			if(count > 0){
+			if(count > 1){
 				fen = fen.concat(count.toString());
-				count = 0;
+				count = 1;
 			}
 			fen = fen.concat('/');
 		}
