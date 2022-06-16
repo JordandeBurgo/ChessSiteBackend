@@ -320,20 +320,19 @@ function GenerateFen(){
     var file = FILES.FILE_A;
     var count = 0;
 	var sq120 = 0;
-	var fen = ""; // fen[fenCnt]
+	var fen = "";
 	var fenChar = ''
 	
 	while ((rank >= RANKS.RANK_1)) {
 		sq120 = FR2SQ(file,rank);
 		fenChar = PceChar[GameBoard.pieces[sq120]];
-		console.log(GameBoard.pieces[sq120]);
 		console.log(fenChar);
 		if (fenChar != '.'){
 			if(count > 0){
-				fen.concat(PceChar[GameBoard.pieces[sq120]]);
+				fen.concat(count.toString());
 				count = 0;
 			}
-			fen.concat(PceChar[GameBoard.pieces[sq120]]);
+			fen.concat(fenChar);
 		}
 		else {
 			count += 1
@@ -343,6 +342,7 @@ function GenerateFen(){
 			file = FILES.FILE_A;
 			rank--;
 		}
+		console.log(fen)
 	}
 	console.log(fen)
 }
