@@ -28,7 +28,7 @@ def join(data):
         room_data["users"][username] = colour
         r.set(room, json.dumps(room_data))
         print(colour)
-        emit('setPlayer', {'player': colour}, room=clients[-1])
+        emit('setPlayer', {'player': colour, 'fen': boardstate}, room=clients[-1])
         emit('setup', {'fen': boardstate}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
 
