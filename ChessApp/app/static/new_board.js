@@ -342,6 +342,7 @@ function GenerateFen(){
 			file = FILES.FILE_A;
 			rank--;
 			if(count > 1){
+				count -= 1;
 				fen = fen.concat(count.toString());
 				count = 1;
 			}
