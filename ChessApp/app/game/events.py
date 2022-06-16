@@ -47,10 +47,6 @@ def movedone(board):
     print("HELLOOOOOOOOOOOOO")
     room = session.get('room')
     room_data = json.loads(r.get(room))
-    if len(room_data['boardstates'])>0:
-        if room_data['boardstates'][-1] != board['board']:
-            room_data['boardstates'].append(board['board'])
-            r.set(room, json.dumps(room_data))
-    else:
+    if room_data['boardstates'][-1] != board['board']:
         room_data['boardstates'].append(board['board'])
         r.set(room, json.dumps(room_data))
