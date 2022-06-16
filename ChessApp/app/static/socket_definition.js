@@ -6,4 +6,5 @@ $(document).ready(function(){
     socket.on('connect', function() {
         socket.emit('join', {'id': t});
     });
+    socket_handle();
 });

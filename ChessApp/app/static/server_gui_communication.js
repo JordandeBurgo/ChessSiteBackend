@@ -4,7 +4,6 @@ function NewGame(fenStr) {
     SetInitialBoardPieces();
     GenerateMoves();
     GenerateLegalMoves();
-    socket_handle();
     GenerateFen();
 }
 
