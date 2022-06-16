@@ -1,5 +1,6 @@
 $(function() {
 	init();
+	NewGame(START_FEN);
 });
 
 function InitFilesRanksBrd() {
