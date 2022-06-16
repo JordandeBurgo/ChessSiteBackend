@@ -24,11 +24,12 @@ def join(data):
             colour = 0 if bool(room_data["users"][player1]) else 1
         else:
             colour = -1
+        boardstate = room_data['boardstates'][-1]
         room_data["users"][username] = colour
         r.set(room, json.dumps(room_data))
         print(colour)
         emit('setPlayer', {'player': colour}, room=clients[-1])
-        emit('setup', {'fen', room_data['boardstates'][-1]}, room=clients[-1])
+        emit('setup', {'fen': boardstate}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
 
 @socketio.on('moved', namespace='/game')
