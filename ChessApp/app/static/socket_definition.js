@@ -4,6 +4,6 @@ $(document).ready(function(){
     console.log(socket);
     socket.on('connect', function() {
         console.log("CONNECTING...")
-        socket.emit('join', {}, namespace="/game");
+        socket.emit('join', {});
     });
 });
