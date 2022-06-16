@@ -19,11 +19,10 @@ def games():
         return redirect(url_for('game.game_instance', roomname=room))
     else:
         if(session.get('username') is not None):
-            room = session['room']
             return redirect(url_for('game.game_instance', roomname=room))
     return redirect(url_for('index'))
 
-game.route('/game/<roomname>')
+@game.route('/game/<roomname>')
 def game_instance(roomname):
     if(session.get('username') is not None):
         #todo: Check whether the user is 1 of the first 2 to join. I.e. one of the 2 players
