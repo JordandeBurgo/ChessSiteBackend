@@ -338,10 +338,12 @@ function socket_handle(){
     });
 
     socket.on('setPlayer', function(data){
-        player = data['player']
+        player = data['player'];
     });
 
     socket.on('setup', function(data){
+        console.log("REEEEEEEEEEEE");
+        console.log(data['fen']);
         NewGame(data['fen']);
     });
 
