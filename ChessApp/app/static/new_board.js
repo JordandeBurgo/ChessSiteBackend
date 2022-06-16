@@ -321,7 +321,7 @@ function GenerateFen(){
     var count = 0;
 	var sq120 = 0;
 	var fen = "";
-	var fenChar = ''
+	var fenChar = '';
 	
 	while ((rank >= RANKS.RANK_1)) {
 		sq120 = FR2SQ(file,rank);
@@ -329,10 +329,10 @@ function GenerateFen(){
 		console.log(fenChar);
 		if (fenChar != '.'){
 			if(count > 0){
-				fen.concat(count.toString());
+				fen = fen.concat(count.toString());
 				count = 0;
 			}
-			fen.concat(fenChar);
+			fen = fen.concat(fenChar);
 		}
 		else {
 			count += 1
@@ -342,7 +342,6 @@ function GenerateFen(){
 			file = FILES.FILE_A;
 			rank--;
 		}
-		console.log(fen)
 	}
 	console.log(fen)
 }
