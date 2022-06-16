@@ -1,6 +1,11 @@
 from flask import session, redirect, url_for, render_template, request
 from . import game
 from ..auth.auth import login_required
+import redis
+import os
+import json
+
+r = redis.from_url(os.environ['REDISCLOUD_URL'])
 
 @game.route('/')
 def index():
@@ -16,6 +21,8 @@ def games():
     if(request.method == 'POST'):
         room = request.form['room']
         session['room'] = room
+        room_data = {"users": {}, "boardstates": []}
+        r.setnx(room, json.dumps(room_data))
         return redirect(url_for('game.game_instance', roomname=room))
     else:
         if(session.get('username') is not None):

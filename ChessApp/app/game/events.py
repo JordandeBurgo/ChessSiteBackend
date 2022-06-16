@@ -1,11 +1,27 @@
 from flask import session
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
+import redis
+import os
+import json
+import random
+
+r = redis.from_url(os.environ['REDISCLOUD_URL'])
 
 @socketio.on('join', namespace='/game')
 def join(data):
     room = data['id']
     join_room(room)
+    room_data = json.loads(r.get(room))
+    username = session.get("username")
+    if(len(room_data["users"]) == 0):
+        colour = round(random.random())
+    else:
+        player1 = list(room_data["users"].keys())[0]
+        colour = 0 if bool(room_data["users"][player1]) else 1
+    room_data["users"][username] = colour
+    print(colour)
+    emit('setPlayer', {'player': colour}, room=room)
     print("SOMEONE JOINED THE ROOM")
     #                              0        1         -1
     #emit whether this player is white or black or spectator
