@@ -10,7 +10,7 @@ GameBoard.fiftyMove = 0;
 GameBoard.hisPly = 0;
 GameBoard.history = [];
 GameBoard.ply = 0;
-GameBoard.enPas = 0;
+GameBoard.enPas = SQUARES.NO_SQ;
 GameBoard.castlePerm = 0;
 GameBoard.material = new Array(2); // WHITE,BLACK material of pieces
 GameBoard.pceNum = new Array(13); // indexed by Pce
@@ -350,6 +350,19 @@ function GenerateFen(){
 			}
 		}
 	}
+
+	fen = fen.concat(" ");
+	fen = fen.concat(SideChar[GameBoard.side]);
+
+	fen = fen.concat(" ");
+	if(GameBoard.enPas != SQUARES.NO_SQ){
+		fen = fen.concat(PrSq(GameBoard.enPas));
+	}
+	else {
+		fen = fen.concat('-');
+	}
+	
+
 	console.log(fen)
 }
 
