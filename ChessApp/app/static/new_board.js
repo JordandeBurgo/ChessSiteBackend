@@ -349,12 +349,31 @@ function GenerateFen(){
 				fen = fen.concat('/');
 			}
 		}
-		file++;
+		else{
+			file++;
+		}
 	}
 
+	//Who turn it is
 	fen = fen.concat(" ");
 	fen = fen.concat(SideChar[GameBoard.side]);
 
+	//Castling rights
+	fen = fen.concat(" ");
+	if(GameBoard.castlePerm & CASTLEBIT.WKCA){
+		fen = fen.concat("K");
+	}
+	if(GameBoard.castlePerm & CASTLEBIT.WQCA){
+		fen = fen.concat("Q");
+	}
+	if(GameBoard.castlePerm & CASTLEBIT.BKCA){
+		fen = fen.concat("k");
+	}
+	if(GameBoard.castlePerm & CASTLEBIT.BQCA){
+		fen = fen.concat("q");
+	}
+
+	//En passant square
 	fen = fen.concat(" ");
 	if(GameBoard.enPas != SQUARES.NO_SQ){
 		fen = fen.concat(PrSq(GameBoard.enPas));
