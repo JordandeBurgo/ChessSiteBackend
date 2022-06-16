@@ -3,8 +3,8 @@ from flask_socketio import emit, join_room, leave_room
 from .. import socketio
 
 @socketio.on('join', namespace='/game')
-def join(msg):
-    room = msg.id
+def join(data):
+    room = data['id']
     join_room(room)
     print("SOMEONE JOINED THE ROOM")
     #                              0        1         -1

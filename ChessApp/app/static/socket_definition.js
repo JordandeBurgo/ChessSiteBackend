@@ -5,6 +5,6 @@ $(document).ready(function(){
     let t = window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
     socket.on('connect', function() {
         console.log("CONNECTING...")
-        socket.emit('join', {id: t});
+        socket.emit('join', {'id': t});
     });
 });
