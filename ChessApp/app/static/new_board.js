@@ -341,6 +341,11 @@ function GenerateFen(){
 		if(file == FILES.FILE_H){
 			file = FILES.FILE_A;
 			rank--;
+			if(count > 0){
+				fen = fen.concat(count.toString());
+				count = 0;
+			}
+			fen = fen.concat('/');
 		}
 	}
 	console.log(fen)
