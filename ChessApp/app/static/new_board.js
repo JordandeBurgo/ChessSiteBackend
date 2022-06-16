@@ -362,8 +362,8 @@ function GenerateFen(){
 		fen = fen.concat('-');
 	}
 	
-
 	console.log(fen)
+	return fen
 }
 
 function PrintSqAttacked() {
