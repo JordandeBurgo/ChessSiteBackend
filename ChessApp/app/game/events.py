@@ -1,4 +1,3 @@
-from tkinter.font import names
 from flask import session, request
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
