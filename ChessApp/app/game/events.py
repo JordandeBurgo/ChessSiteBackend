@@ -1,4 +1,4 @@
-from flask import session
+from flask import session, request
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
 import redis
@@ -7,14 +7,16 @@ import json
 import random
 
 r = redis.from_url(os.environ['REDISCLOUD_URL'])
+clients = []
 
 @socketio.on('join', namespace='/game')
 def join(data):
     room = data['id']
+    clients.append(request.sid)
     join_room(room)
     room_data = json.loads(r.get(room))
     username = session.get("username")
-    if(len(room_data["users"]) == 0):
+    if(len(room_data["users"].keys()) == 0):
         colour = round(random.random())
         print("YEEHAW")
     else:
@@ -24,7 +26,7 @@ def join(data):
         print(bool(room_data["users"][player1]))
     room_data["users"][username] = colour
     print(colour)
-    emit('setPlayer', {'player': colour}, room=room)
+    emit('setPlayer', {'player': colour}, room=clients[-1])
     print("SOMEONE JOINED THE ROOM")
     #                              0        1         -1
     #emit whether this player is white or black or spectator
