@@ -1,5 +1,3 @@
-const { emit } = require("process");
-
 function NewGame(fenStr) {
     ParseFen(fenStr);
     PrintBoard();

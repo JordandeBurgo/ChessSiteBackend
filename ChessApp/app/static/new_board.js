@@ -338,7 +338,6 @@ function GenerateFen(){
 		else {
 			count += 1
 		}
-		file++;
 		if(file == FILES.FILE_H){
 			file = FILES.FILE_A;
 			rank--;
@@ -350,6 +349,7 @@ function GenerateFen(){
 				fen = fen.concat('/');
 			}
 		}
+		file++;
 	}
 
 	fen = fen.concat(" ");
