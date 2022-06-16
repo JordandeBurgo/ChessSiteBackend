@@ -329,6 +329,7 @@ function GenerateFen(){
 		console.log(fenChar);
 		if (fenChar != '.'){
 			if(count > 1){
+				count -= 1;
 				fen = fen.concat(count.toString());
 				count = 1;
 			}

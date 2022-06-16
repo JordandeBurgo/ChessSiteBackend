@@ -44,3 +44,5 @@ ASK CODY: Is the only difference between storing something in a vairbale on the 
           that the database will still be there if the server goes off? Is this something I need to
           worry about when thinking about storing fen strings of the board state or of what side the
           players are on, could that be just in a vairbale or would that do something weird?
+
+ERROR: Reloading the page resets your piece colour so you become other colour or spectator, obvious reason

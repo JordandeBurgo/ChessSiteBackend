@@ -1,3 +1,5 @@
+const { emit } = require("process");
+
 function NewGame(fenStr) {
     ParseFen(fenStr);
     PrintBoard();
@@ -63,7 +65,7 @@ function ClickedSquare(sq){
             promotion = false;
             var parsed2 = ParseMoveHuman(UserMove.from, UserMove.to, PIECES[promoPce.substring(1)]);
             if(parsed2 != NOMOVE){
-                socket.emit('moved', {'move': parsed2, 'board': GenerateFen()});
+                socket.emit('moved', {'move': parsed2});
                 $(".hover").removeClass("hover");
             }
             UserMove.from = SQUARES.NO_SQ;
@@ -111,7 +113,7 @@ function ClickedSquare(sq){
         }
         else {
             if(parsed != NOMOVE){
-                socket.emit('moved', {'move': parsed, 'board': GenerateFen()});
+                socket.emit('moved', {'move': parsed});
             }
             UserMove.from = SQUARES.NO_SQ;
             UserMove.to = SQUARES.NO_SQ;
@@ -331,6 +333,7 @@ function socket_handle(){
     socket.on('domove', function(data){
         MoveGUIPiece(data['move']);
         MakeMove(data['move']);
+        socket.emit('movedone', {'board':GenerateFen()})
         PrintBoard();
         GenerateMoves();
         GenerateLegalMoves();

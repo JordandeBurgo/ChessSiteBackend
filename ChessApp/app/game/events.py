@@ -1,3 +1,4 @@
+from tkinter.font import names
 from flask import session, request
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
@@ -33,8 +34,6 @@ def join(data):
     #also save this to session data ( delete at end of game with session.pop('variable_name') )
     #also save this to room data (probably in a database table?) so that the second player/correct player 
         #can have the other colour and all after get spectator actually can I just use a vaiable? Maybe ask cody
-    
-
 
 @socketio.on('moved', namespace='/game')
 def moved(move):
@@ -42,7 +41,12 @@ def moved(move):
     room = session.get('room')
     print(move['move'])
     #todo: check if the move is legal
-    room_data = json.loads(r.get(room))
-    room_data['boardstates'].append(move['board'])
-    r.set(room, json.dumps(room_data))
     emit('domove', {'move': move['move']}, room=room)
+
+@socketio.on('movedone', namespace='/game')
+def movedone(board):
+    room = session.get('room')
+    room_data = json.loads(r.get(room))
+    if room_data['boardstates'][-1] != board['board']:
+        room_data['boardstates'].append(board['board'])
+    r.set(room, json.dumps(room_data))
