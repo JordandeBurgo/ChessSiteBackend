@@ -44,6 +44,7 @@ def moved(move):
 
 @socketio.on('movedone', namespace='/game')
 def movedone(board):
+    print("HELLOOOOOOOOOOOOO")
     room = session.get('room')
     room_data = json.loads(r.get(room))
     if room_data['boardstates'][-1] != board['board']:

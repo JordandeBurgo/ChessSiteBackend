@@ -331,7 +331,7 @@ function socket_handle(){
     socket.on('domove', function(data){
         MoveGUIPiece(data['move']);
         MakeMove(data['move']);
-        socket.emit('movedone', {'board':GenerateFen()})
+        socket.emit('movedone', {'board':GenerateFen()});
         PrintBoard();
         GenerateMoves();
         GenerateLegalMoves();
