@@ -63,7 +63,7 @@ function ClickedSquare(sq){
             promotion = false;
             var parsed2 = ParseMoveHuman(UserMove.from, UserMove.to, PIECES[promoPce.substring(1)]);
             if(parsed2 != NOMOVE){
-                socket.emit('moved', {'move': parsed2});
+                socket.emit('moved', {'move': parsed2, 'board': GenerateFen()});
                 $(".hover").removeClass("hover");
             }
             UserMove.from = SQUARES.NO_SQ;
