@@ -16,10 +16,11 @@ def games():
     if(request.method == 'POST'):
         room = request.form['room']
         session['room'] = room
-        return redirect(url_for('game.game_instance'))
+        return redirect(url_for('game.game_instance', roomname=room))
     else:
         if(session.get('username') is not None):
-            return redirect(url_for('game.game_instance'))
+            room = session['room']
+            return redirect(url_for('game.game_instance', roomname=room))
     return redirect(url_for('index'))
 
 game.route('/game/<roomname>')
