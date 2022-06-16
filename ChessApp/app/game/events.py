@@ -11,28 +11,25 @@ clients = []
 
 @socketio.on('join', namespace='/game')
 def join(data):
-    room = data['id']
-    clients.append(request.sid)
-    join_room(room)
-    room_data = json.loads(r.get(room))
     username = session.get("username")
-    if(len(room_data["users"].keys()) == 0):
-        colour = round(random.random())
-    elif(len(room_data["users"].keys()) == 1):
-        player1 = list(room_data["users"].keys())[0]
-        colour = 0 if bool(room_data["users"][player1]) else 1
-    else:
-        colour = -1
-    room_data["users"][username] = colour
-    r.set(room, json.dumps(room_data))
-    print(colour)
-    emit('setPlayer', {'player': colour}, room=clients[-1])
-    print("SOMEONE JOINED THE ROOM")
-    #                              0        1         -1
-    #emit whether this player is white or black or spectator
-    #also save this to session data ( delete at end of game with session.pop('variable_name') )
-    #also save this to room data (probably in a database table?) so that the second player/correct player 
-        #can have the other colour and all after get spectator actually can I just use a vaiable? Maybe ask cody
+    if username is not None:
+        room = data['id']
+        clients.append(request.sid)
+        join_room(room)
+        room_data = json.loads(r.get(room))
+        if(len(room_data["users"].keys()) == 0):
+            colour = round(random.random())
+        elif(len(room_data["users"].keys()) == 1):
+            player1 = list(room_data["users"].keys())[0]
+            colour = 0 if bool(room_data["users"][player1]) else 1
+        else:
+            colour = -1
+        room_data["users"][username] = colour
+        r.set(room, json.dumps(room_data))
+        print(colour)
+        emit('setPlayer', {'player': colour}, room=clients[-1])
+        emit('setup', {'fen', room_data['boardstates'][-1]}, room=clients[-1])
+        print("SOMEONE JOINED THE ROOM")
 
 @socketio.on('moved', namespace='/game')
 def moved(move):
@@ -44,9 +41,9 @@ def moved(move):
 
 @socketio.on('movedone', namespace='/game')
 def movedone(board):
-    print("HELLOOOOOOOOOOOOO")
     room = session.get('room')
     room_data = json.loads(r.get(room))
     if room_data['boardstates'][-1] != board['board']:
         room_data['boardstates'].append(board['board'])
         r.set(room, json.dumps(room_data))
+

@@ -340,4 +340,9 @@ function socket_handle(){
     socket.on('setPlayer', function(data){
         player = data['player']
     });
+
+    socket.on('setup', function(data){
+        NewGame(data['fen']);
+    });
+
 }
