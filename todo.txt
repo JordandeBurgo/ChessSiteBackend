@@ -1,10 +1,10 @@
-Make sure that the correct user is moving
+//Make sure that the correct user is moving
 
 Make sure that the move from the client is valid on the server
 
 Make the user leave the room at the end of the game - add a forfeit button
 
-Make it so that a room name becomes the link for the room
+//Make it so that a room name becomes the link for the room
     - This is instead of all rooms being in "/game" and rooms being stored only in session data
     - Using this link people should be able to join as spectators - even not logged in
     - Might be able to do this with "/<int:id>" or something? That may only be for ints may like 
@@ -20,6 +20,8 @@ the clients as this causes errors anyway
 
 Add menu that allows you to choose "Local v Human, Local v Bot, or Online Human v Human"
     - The bot doesnt exist yet but that's a plan for the future
+
+Add something that makes it obvious whos turn it is
 
 Add game timer - and the ability to choose time control on creating a game
 
