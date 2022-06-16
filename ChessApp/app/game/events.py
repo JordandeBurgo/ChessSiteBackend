@@ -51,3 +51,6 @@ def movedone(board):
         if room_data['boardstates'][-1] != board['board']:
             room_data['boardstates'].append(board['board'])
             r.set(room, json.dumps(room_data))
+    else:
+        room_data['boardstates'].append(board['board'])
+        r.set(room, json.dumps(room_data))
