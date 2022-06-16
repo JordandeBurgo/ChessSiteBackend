@@ -18,12 +18,11 @@ def join(data):
     username = session.get("username")
     if(len(room_data["users"].keys()) == 0):
         colour = round(random.random())
-        print("YEEHAW")
-    else:
+    elif(len(room_data["users"].keys()) == 1):
         player1 = list(room_data["users"].keys())[0]
         colour = 0 if bool(room_data["users"][player1]) else 1
-        print("HOWDY")
-        print(bool(room_data["users"][player1]))
+    else:
+        colour = -1
     room_data["users"][username] = colour
     r.set(room, json.dumps(room_data))
     print(colour)
