@@ -326,6 +326,8 @@ function GenerateFen(){
 	while ((rank >= RANKS.RANK_1)) {
 		sq120 = FR2SQ(file,rank);
 		fenChar = PceChar[GameBoard.pieces[sq120]];
+		console.log(GameBoard.pieces[sq120]);
+		console.log(fenChar);
 		if (fenChar != '.'){
 			if(count > 0){
 				fen.concat(PceChar[GameBoard.pieces[sq120]]);
