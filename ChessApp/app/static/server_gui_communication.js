@@ -5,6 +5,7 @@ function NewGame(fenStr) {
     GenerateMoves();
     GenerateLegalMoves();
     socket_handle();
+    GenerateFen();
 }
 
 function ClearAllPieces(){

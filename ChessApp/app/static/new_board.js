@@ -315,6 +315,36 @@ function ParseFen(fen) {
 	UpdateListsMaterial();
 }
 
+function GenerateFen(){
+	var rank = RANKS.RANK_8;
+    var file = FILES.FILE_A;
+    var count = 0;
+	var sq120 = 0;
+	var fen = ""; // fen[fenCnt]
+	var fenChar = ''
+	
+	while ((rank >= RANKS.RANK_1)) {
+		sq120 = FR2SQ(file,rank);
+		fenChar = PceChar[GameBoard.pieces[sq120]];
+		if (fenChar != '.'){
+			if(count > 0){
+				fen.concat(PceChar[GameBoard.pieces[sq120]]);
+				count = 0;
+			}
+			fen.concat(PceChar[GameBoard.pieces[sq120]]);
+		}
+		else {
+			count += 1
+		}
+		file++;
+		if(file == FILES.FILE_H){
+			file = FILES.FILE_A;
+			rank--;
+		}
+	}
+	console.log(fen)
+}
+
 function PrintSqAttacked() {
 	
 	var sq,file,rank,piece;
