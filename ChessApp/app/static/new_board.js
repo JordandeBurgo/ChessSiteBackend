@@ -345,7 +345,9 @@ function GenerateFen(){
 				fen = fen.concat(count.toString());
 				count = 1;
 			}
-			fen = fen.concat('/');
+			if(rank < RANKS.RANK_1){
+				fen = fen.concat('/');
+			}
 		}
 	}
 	console.log(fen)
