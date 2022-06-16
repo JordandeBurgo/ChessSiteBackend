@@ -44,4 +44,5 @@ def moved(move):
     #todo: check if the move is legal
     room_data = json.loads(r.get(room))
     room_data['boardstates'].append(move['board'])
+    r.set(room, json.dumps(room_data))
     emit('domove', {'move': move['move']}, room=room)
