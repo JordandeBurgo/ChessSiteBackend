@@ -343,10 +343,4 @@ function socket_handle(){
         player = data['player'];
         NewGame(data['fen']);
     });
-
-    socket.on('setup', function(data){
-        console.log(data['fen']);
-        NewGame(data['fen']);
-    });
-
 }
