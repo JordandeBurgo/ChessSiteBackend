@@ -4,7 +4,7 @@ from .. import socketio
 
 @socketio.on('join', namespace='/game')
 def join(msg):
-    room = session.get('room')
+    room = msg.id
     join_room(room)
     print("SOMEONE JOINED THE ROOM")
     #                              0        1         -1
