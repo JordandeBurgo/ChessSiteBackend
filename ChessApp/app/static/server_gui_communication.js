@@ -337,9 +337,10 @@ function socket_handle(){
     });
 
     socket.on('setPlayer', function(data){
-        console.log("REEEEEEEEEEEE");
-        console.log(data['fen']);
         player = data['player'];
+    });
+
+    socket.on('setBoard', function(data){
         NewGame(data['fen']);
     });
 }

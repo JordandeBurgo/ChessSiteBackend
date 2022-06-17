@@ -17,17 +17,20 @@ def join(data):
         clients.append(request.sid)
         join_room(room)
         room_data = json.loads(r.get(room))
-        if(len(room_data["users"].keys()) == 0):
-            colour = round(random.random())
-        elif(len(room_data["users"].keys()) == 1):
-            player1 = list(room_data["users"].keys())[0]
-            colour = 0 if bool(room_data["users"][player1]) else 1
-        else:
-            colour = -1
-        room_data["users"][username] = colour
-        r.set(room, json.dumps(room_data))
-        print(colour)
-        emit('setPlayer', {'player': colour, 'fen': room_data["boardstates"][-1]}, room=clients[-1])
+        if(username not in list(room_data["users"].keys())):
+            if(len(room_data["users"].keys()) == 0):
+                colour = round(random.random())
+            elif(len(room_data["users"].keys()) == 1):
+                player1 = list(room_data["users"].keys())[0]
+                colour = 0 if bool(room_data["users"][player1]) else 1
+            else:
+                colour = -1
+            room_data["users"][username] = colour
+            r.set(room, json.dumps(room_data))
+            print(colour)
+            emit('setPlayer', {'player': colour}, room=clients[-1])
+        
+        emit('setBoard', {'fen': room_data["boardstates"][-1]}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
 
 @socketio.on('moved', namespace='/game')
