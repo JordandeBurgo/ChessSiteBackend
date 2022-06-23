@@ -49,3 +49,7 @@ def movedone(board):
     if room_data['boardstates'][-1] != board['board']:
         room_data['boardstates'].append(board['board'])
         r.set(room, json.dumps(room_data))
+
+@socketio.on('disconnect')
+def disconnect():
+    print(get_room_client([session.get('room')]))
