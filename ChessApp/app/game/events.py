@@ -53,4 +53,4 @@ def movedone(board):
 @socketio.on('disconnect', namespace='/game')
 def disconnected():
     print("DISCONNECTED")
-    print(get_room_client([session.get('room')]))
+    print(session.get("username"))
