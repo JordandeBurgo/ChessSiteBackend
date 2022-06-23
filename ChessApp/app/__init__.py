@@ -3,7 +3,7 @@ from flask import Flask, session
 from flask_socketio import SocketIO
 from flask_session import Session
 
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO(cors_allowed_origins="*", logger=True, engineio_logger=True)
 
 def create_app(test_config=None):
     app = Flask(__name__)

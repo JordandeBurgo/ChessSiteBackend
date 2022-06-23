@@ -345,6 +345,6 @@ function socket_handle(){
     });
 
     socket.on('disconnect', function () {
-        socket.emit('user_disconnect',{})
+        socket.emit('disconnect',{})
     });
 }

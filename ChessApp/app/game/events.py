@@ -52,4 +52,5 @@ def movedone(board):
 
 @socketio.on('disconnect')
 def user_disconnect():
+    print("DISCONNECTING...")
     print(get_room_client([session.get('room')]))
