@@ -50,7 +50,7 @@ def movedone(board):
         room_data['boardstates'].append(board['board'])
         r.set(room, json.dumps(room_data))
 
-@socketio.on('disconnect')
-def user_disconnect():
-    print("DISCONNECTING...")
+@socketio.on('disconnect', namespace='/game')
+def disconnected():
+    print("DISCONNECTED")
     print(get_room_client([session.get('room')]))

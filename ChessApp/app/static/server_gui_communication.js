@@ -343,8 +343,4 @@ function socket_handle(){
     socket.on('setBoard', function(data){
         NewGame(data['fen']);
     });
-
-    socket.on('disconnect', function () {
-        socket.emit('disconnect',{})
-    });
 }
