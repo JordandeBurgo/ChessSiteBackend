@@ -51,5 +51,5 @@ def movedone(board):
         r.set(room, json.dumps(room_data))
 
 @socketio.on('disconnect')
-def disconnect():
+def user_disconnect():
     print(get_room_client([session.get('room')]))
