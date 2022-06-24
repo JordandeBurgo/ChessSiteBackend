@@ -21,7 +21,7 @@ def games():
     if(request.method == 'POST'):
         room = request.form['room']
         session['room'] = room
-        room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"]}
+        room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connected": []}
         r.setnx(room, json.dumps(room_data))
         return redirect(url_for('game.game_instance', roomname=room))
     else:

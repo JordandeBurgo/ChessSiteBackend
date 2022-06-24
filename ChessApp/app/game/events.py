@@ -20,16 +20,21 @@ def join(data):
         if(username not in list(room_data["users"].keys())):
             if(len(room_data["users"].keys()) == 0):
                 colour = round(random.random())
+                room_data["connectedPlayers"].append(username)
             elif(len(room_data["users"].keys()) == 1):
                 player1 = list(room_data["users"].keys())[0]
                 colour = 0 if bool(room_data["users"][player1]) else 1
+                room_data["connectedPlayers"].append(username)
             else:
                 colour = -1
             room_data["users"][username] = colour
+            
             r.set(room, json.dumps(room_data))
             print(colour)
         else:
             colour = room_data["users"][username]
+            if colour != -1:
+                room_data["connectedPlayers"].append(username)
         emit('setPlayer', {'player': colour}, room=clients[-1])
         emit('setBoard', {'fen': room_data["boardstates"][-1]}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
@@ -53,4 +58,12 @@ def movedone(board):
 @socketio.on('disconnect', namespace='/game')
 def disconnected():
     print("DISCONNECTED")
-    print(session.get("username"))
+    username = session.get("username")
+    room = session.get('room')
+    room_data = json.loads(r.get(room))
+    colour = room_data["users"][username]
+    if colour != -1:
+        room_data["connectedPlayers"].remove(username)
+    if len(room_data["connectedPlayers"]) == 0:
+        emit('close', {}, room=room)
+        r.delete(room)

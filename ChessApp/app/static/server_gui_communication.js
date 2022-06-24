@@ -357,4 +357,8 @@ function socket_handle(){
     socket.on('setBoard', function(data){
         NewGame(data['fen']);
     });
+
+    socket.on('close', function(data){
+        window.location.href = "/index.html";
+    });
 }

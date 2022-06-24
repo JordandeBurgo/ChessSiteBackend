@@ -24,10 +24,8 @@ def register():
             user_info = {"username": email, "password": generate_password_hash(password)}
             setuser = r.setnx(email, json.dumps(user_info))
             if setuser == 0:
-                print("BYE")
                 error = f"User {email} is already registered."
             else:
-                print("HELLO")
                 redirect(url_for('auth.login'))
         flash(error)
     return render_template('auth/register.html')
