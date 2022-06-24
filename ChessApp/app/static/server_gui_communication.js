@@ -330,6 +330,14 @@ function socket_handle(){
     socket.on('domove', function(data){
         MoveGUIPiece(data['move']);
         MakeMove(data['move']);
+        if(GameBoard.side == COLOURS.WHITE){
+            document.getElementById("whitetoken").style.visibility = "visible";
+            document.getElementById("blacktoken").style.visibility = "hidden";
+        }
+        else {
+            document.getElementById("whitetoken").style.visibility = "hideen";
+            document.getElementById("blacktoken").style.visibility = "visible";
+        }
         socket.emit('movedone', {'board':GenerateFen()});
         PrintBoard();
         GenerateMoves();

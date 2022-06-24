@@ -14,12 +14,19 @@
 
 #turntoken {
     display: flex;
-    visibility: hidden;
     width: 75%;
     max-width: 900px;
     min-width: 275px;
     position: relative;
     margin: 0 auto;
+}
+
+#whitetoken {
+    visibility: visible;
+}
+
+#blacktoken {
+    visibility: hidden;
 }
 
 .container {
