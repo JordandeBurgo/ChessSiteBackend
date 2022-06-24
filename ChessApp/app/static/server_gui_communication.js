@@ -360,7 +360,7 @@ function socket_handle(){
         }
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
-        playerTitle.appendChild(playerTitleName);
+        playerTitle.appendChild(bold);
     });
 
     socket.on('setBoard', function(data){
