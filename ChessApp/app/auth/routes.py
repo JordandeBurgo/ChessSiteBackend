@@ -6,8 +6,6 @@ import redis
 import os
 import json
 
-from ..db import get_db
-
 r = redis.from_url(os.environ['REDISCLOUD_URL'])
 
 @auth.route('/register', methods=('GET', 'POST'))
