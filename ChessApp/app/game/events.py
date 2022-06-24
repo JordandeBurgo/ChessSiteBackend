@@ -35,6 +35,7 @@ def join(data):
             colour = room_data["users"][username]
             if colour != -1:
                 room_data["connectedPlayers"].append(username)
+                r.set(room, json.dumps(room_data))
         emit('setPlayer', {'player': colour}, room=clients[-1])
         emit('setBoard', {'fen': room_data["boardstates"][-1]}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
