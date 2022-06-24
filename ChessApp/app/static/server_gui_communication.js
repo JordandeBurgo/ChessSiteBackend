@@ -335,7 +335,7 @@ function socket_handle(){
             document.getElementById("blacktoken").style.visibility = "hidden";
         }
         else {
-            document.getElementById("whitetoken").style.visibility = "hideen";
+            document.getElementById("whitetoken").style.visibility = "hidden";
             document.getElementById("blacktoken").style.visibility = "visible";
         }
         socket.emit('movedone', {'board':GenerateFen()});
