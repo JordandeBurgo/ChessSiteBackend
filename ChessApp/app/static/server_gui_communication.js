@@ -347,17 +347,20 @@ function socket_handle(){
     socket.on('setPlayer', function(data){
         player = data['player'];
         playerTitle = document.getElementById("playerTitle");
+        bold = document.createElement('strong');
+        text = document.createTextNode("YOU ARE ");
         if(player == 1){
-            playerTitleName = "YOU ARE BLACK";
+            playerTitleName = document.createTextNode("BLACK");
         }
         else if(player == 0){
-            playerTitleName = "YOU ARE WHITE";
+            playerTitleName = document.createTextNode("WHITE");
         }
         else{
-            playerTitleName = "YOU ARE A SPECTATOR";
+            playerTitleName = document.createTextNode("A SPECTATOR");
         }
-        playerTitleText = document.createTextNode(playerTitleName);
-        playerTitle.appendChild(playerTitleText);
+        bold.appendChild(playerTitleName);
+        playerTitle.appendChild(text);
+        playerTitle.appendChild(playerTitleName);
     });
 
     socket.on('setBoard', function(data){
