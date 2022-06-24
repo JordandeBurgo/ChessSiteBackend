@@ -64,6 +64,7 @@ def disconnected():
     colour = room_data["users"][username]
     if colour != -1:
         room_data["connectedPlayers"].remove(username)
+        r.set(room, json.dumps(room_data))
     if len(room_data["connectedPlayers"]) == 0:
         emit('close', {}, room=room)
         r.delete(room)
