@@ -17,6 +17,15 @@
             <div class="board">
             </div>
         </div>
+        {% if session['colour'] == 0 %}
+            <p>WHITE</p>
+        {% endif %}
+        {% if session['colour'] == 1 %}
+            <p>BLACK</p>
+        {% endif %}
+        {% if session['colour'] == -1 %}
+            <p>SPECTATOR</p>
+        {% endif %}
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
         <script src="/static/jquery-3.6.0.min.js"></script>
         <script src="/static/socket_definition.js"></script>
@@ -28,15 +37,5 @@
         <script src="/static/server_gui_communication.js"></script>
         <script src="/static/server_main.js"></script>
         <script src="/static/app.js"></script>
-        <div class="button-div">
-            <div class="buttons">
-                <button class="button" onclick="dis()">Disconnect</button>
-            </div>
-        </div>
-        <script>
-            function dis(){
-                socket.emit('disconnect');
-            }
-        </script>
     </body>
 {% endblock content %}

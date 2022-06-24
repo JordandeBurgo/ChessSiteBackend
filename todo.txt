@@ -1,6 +1,17 @@
 //Make sure that the correct user is moving
 
 Make the user leave the room at the end of the game - add a forfeit button
+    - Got a disconnect function running and how to see who is disconnecting, can use this to
+      check if both *playing* clients have disconnected, if they have boot everyone (spectators)
+      out the room and delete room data from redis. Perhaps keep a "connected users" key in redis
+      for this
+
+Add something that makes it obvious whos turn it is
+    - At the moment I am thinking have 2 html elements that are just squares at the top and bottom
+      of the board, when a user makes a move the one square becomes hidden and the other becomes
+      visible
+
+Add end of game popup
 
 //Make it so that a room name becomes the link for the room
     - This is instead of all rooms being in "/game" and rooms being stored only in session data
@@ -19,8 +30,6 @@ the clients as this causes errors anyway
 Add menu that allows you to choose "Local v Human, Local v Bot, or Online Human v Human"
     - The bot doesnt exist yet but that's a plan for the future
 
-Add something that makes it obvious whos turn it is
-
 Add game timer - and the ability to choose time control on creating a game
 
 Make it so that there is a list of online users
@@ -34,8 +43,7 @@ Confirm email address for signup
 
 Play a sound on a move + possibly add an animation for if you didnt drag/recieved a move
 
-Make something obvious to show whos turn it is
-
-Add end of game popup
+Be able to view previous boards, but bring back to the actual board and only able to play on actual
+board
 
 Make sure that the move from the client is valid on the server
