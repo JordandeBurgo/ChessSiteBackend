@@ -4,7 +4,7 @@
 }
 
 .button-div {
-    display: hidden;
+    display: flex;
     width: 75%;
     max-width: 900px;
     min-width: 275px;
@@ -14,6 +14,7 @@
 
 #turntoken {
     display: flex;
+    visibility: hidden;
     width: 75%;
     max-width: 900px;
     min-width: 275px;
