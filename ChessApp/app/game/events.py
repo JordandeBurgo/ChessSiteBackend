@@ -31,7 +31,6 @@ def join(data):
         else:
             colour = room_data["users"][username]
         emit('setPlayer', {'player': colour}, room=clients[-1])
-        session['colour'] = colour
         emit('setBoard', {'fen': room_data["boardstates"][-1]}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
 
