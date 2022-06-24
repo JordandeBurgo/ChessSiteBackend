@@ -338,6 +338,20 @@ function socket_handle(){
 
     socket.on('setPlayer', function(data){
         player = data['player'];
+        playerTitle = document.createElement("div");
+        if(player == 1){
+            playerTitleName = "BLACK";
+        }
+        else if(player == 0){
+            playerTitleName = "WHITE";
+        }
+        else{
+            playerTitleName = "SPECTATOR";
+        }
+        playerTitleText = document.createTextNode(playerTitleName);
+        playerTitle.appendChild(playerTitleText);
+        currentDiv = document.getElementById("container");
+        document.body.insertBefore(playerTitle, currentDiv);
     });
 
     socket.on('setBoard', function(data){

@@ -28,22 +28,5 @@
         <script src="/static/server_gui_communication.js"></script>
         <script src="/static/server_main.js"></script>
         <script src="/static/app.js"></script>
-        <script>
-            playerTitle = document.createElement("div");
-            console.log(player);
-            if(player == 1){
-                playerTitleName = "BLACK";
-            }
-            else if(player == 0){
-                playerTitleName = "WHITE";
-            }
-            else{
-                playerTitleName = "SPECTATOR";
-            }
-            playerTitleText = document.createTextNode(playerTitleName);
-            playerTitle.appendChild(playerTitleText);
-            currentDiv = document.getElementById("container");
-            document.body.insertBefore(playerTitle, currentDiv);
-        </script>
     </body>
 {% endblock content %}
