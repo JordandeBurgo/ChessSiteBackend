@@ -46,4 +46,6 @@ Play a sound on a move + possibly add an animation for if you didnt drag/recieve
 Be able to view previous boards, but bring back to the actual board and only able to play on actual
 board
 
+Flip board capability - autoflip for black - seeingly simple but actually A LOT of work
+
 Make sure that the move from the client is valid on the server
