@@ -4,7 +4,7 @@ function NewGame(fenStr) {
     SetInitialBoardPieces();
     GenerateMoves();
     GenerateLegalMoves();
-    socket_handle();
+    GenerateFen();
 }
 
 function ClearAllPieces(){
@@ -330,12 +330,44 @@ function socket_handle(){
     socket.on('domove', function(data){
         MoveGUIPiece(data['move']);
         MakeMove(data['move']);
+        if(GameBoard.side == COLOURS.WHITE){
+            document.getElementById("whitetoken").style.visibility = "visible";
+            document.getElementById("blacktoken").style.visibility = "hidden";
+        }
+        else {
+            document.getElementById("whitetoken").style.visibility = "hidden";
+            document.getElementById("blacktoken").style.visibility = "visible";
+        }
+        socket.emit('movedone', {'board':GenerateFen()});
         PrintBoard();
         GenerateMoves();
         GenerateLegalMoves();
     });
 
     socket.on('setPlayer', function(data){
-        player = data['player']
+        player = data['player'];
+        playerTitle = document.getElementById("playerTitle");
+        bold = document.createElement('strong');
+        text = document.createTextNode("YOU ARE ");
+        if(player == 1){
+            playerTitleName = document.createTextNode("BLACK");
+        }
+        else if(player == 0){
+            playerTitleName = document.createTextNode("WHITE");
+        }
+        else{
+            playerTitleName = document.createTextNode("A SPECTATOR");
+        }
+        bold.appendChild(playerTitleName);
+        playerTitle.appendChild(text);
+        playerTitle.appendChild(bold);
+    });
+
+    socket.on('setBoard', function(data){
+        NewGame(data['fen']);
+    });
+
+    socket.on('close', function(data){
+        window.location.href = "/";
     });
 }

@@ -12,6 +12,14 @@
     margin: 0 auto;
 }
 
+#whitetoken {
+    visibility: visible;
+}
+
+#blacktoken {
+    visibility: hidden;
+}
+
 .container {
     display: flex;
     width: 75%;

@@ -227,6 +227,8 @@ function callPiece(square){
 
 function dragStart(ev){
     mouseU = false;
+    console.log(player);
+    console.log(GameBoard.side);
     if(((ev.currentTarget.classList.toString().split(" ").some(c=> whitepieces.indexOf(c) >= 0) && GameBoard.side == 0) || (ev.currentTarget.classList.toString().split(" ").some(c=> blackpieces.indexOf(c) >= 0) && GameBoard.side == 1)) && (GameBoard.side == player || player == COLOURS.BOTH)){
         ClickedSquare(ev.currentTarget);
 

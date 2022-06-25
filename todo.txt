@@ -1,16 +1,25 @@
-Make sure that the correct user is moving
-
-Make sure that the move from the client is valid on the server
+//Make sure that the correct user is moving
 
 Make the user leave the room at the end of the game - add a forfeit button
+    - Got a disconnect function running and how to see who is disconnecting, can use this to
+      check if both *playing* clients have disconnected, if they have boot everyone (spectators)
+      out the room and delete room data from redis. Perhaps keep a "connected users" key in redis
+      for this
 
-Make it so that a room name becomes the link for the room
+Add something that makes it obvious whos turn it is
+    - At the moment I am thinking have 2 html elements that are just squares at the top and bottom
+      of the board, when a user makes a move the one square becomes hidden and the other becomes
+      visible
+
+Add end of game popup
+
+//Make it so that a room name becomes the link for the room
     - This is instead of all rooms being in "/game" and rooms being stored only in session data
     - Using this link people should be able to join as spectators - even not logged in
     - Might be able to do this with "/<int:id>" or something? That may only be for ints may like 
       "/<roomname>" or something of that sort
 
-Make it so that the game state is stored on the server for the room, and that refreshing
+//Make it so that the game state is stored on the server for the room, and that refreshing
 the page makes it so that you get back the same game, rather than it resetting on one of
 the clients as this causes errors anyway
     - Probably need to define a way to parse the board to create an fen and store that fen in a
@@ -32,13 +41,9 @@ Make it so challenges create random rooms rather than the user choosing a room n
 
 Confirm email address for signup
 
-ASK CODY: Could I emit a move to the other client and ask the other client if the move was legal
-          before commiting the move, would this be enough? Or does it need to be checked server side?
-          As this saves a lot of code and brain power XD
-          Potential problem: If a user figures out how to do a move for the other person, it will be "legal"
-                             on both client sides but not actually allowed
-          
-ASK CODY: Is the only difference between storing something in a vairbale on the server and in a database
-          that the database will still be there if the server goes off? Is this something I need to
-          worry about when thinking about storing fen strings of the board state or of what side the
-          players are on, could that be just in a vairbale or would that do something weird?
+Play a sound on a move + possibly add an animation for if you didnt drag/recieved a move
+
+Be able to view previous boards, but bring back to the actual board and only able to play on actual
+board
+
+Make sure that the move from the client is valid on the server

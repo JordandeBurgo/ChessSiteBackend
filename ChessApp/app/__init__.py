@@ -2,16 +2,14 @@ import os
 from flask import Flask, session
 from flask_socketio import SocketIO
 from flask_session import Session
-from flask_cors import CORS
 
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO(cors_allowed_origins="*", logger=True, engineio_logger=True)
 
 def create_app(test_config=None):
     app = Flask(__name__)
     app.debug = True
     app.config['SECRET_KEY'] = 'secret'
     app.config['SESSION_TYPE'] = 'filesystem'
-    CORS(app)
 
     Session(app)
 

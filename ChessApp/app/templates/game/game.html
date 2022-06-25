@@ -9,6 +9,12 @@
 
 {% block content %}
     <body>
+        <div id="playerTitle">
+        </div>
+        <div id="turntoken">
+            <div id="whitetoken"><strong>WHITE</strong> TO PLAY</div>
+            <div id="blacktoken"><strong>BLACK</strong> TO PLAY</div>
+        </div>
         <div class="container">	
             <div class="upperdiv">
                 <div class="numbers"></div>
@@ -25,10 +31,8 @@
         <script src="/static/new_board.js"></script>
         <script src="/static/new_movegen.js"></script>
         <script src="/static/new_makemove.js"></script>
-        <script src="/static/performance_test.js"></script>
         <script src="/static/server_gui_communication.js"></script>
-        <script src="/static/new_main.js"></script>
+        <script src="/static/server_main.js"></script>
         <script src="/static/app.js"></script>
-        <script src="/static/bot.js"></script>
     </body>
 {% endblock content %}

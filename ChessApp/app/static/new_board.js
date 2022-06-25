@@ -10,7 +10,7 @@ GameBoard.fiftyMove = 0;
 GameBoard.hisPly = 0;
 GameBoard.history = [];
 GameBoard.ply = 0;
-GameBoard.enPas = 0;
+GameBoard.enPas = SQUARES.NO_SQ;
 GameBoard.castlePerm = 0;
 GameBoard.material = new Array(2); // WHITE,BLACK material of pieces
 GameBoard.pceNum = new Array(13); // indexed by Pce
@@ -313,6 +313,78 @@ function ParseFen(fen) {
 	
 	GameBoard.posKey = GeneratePosKey();	
 	UpdateListsMaterial();
+}
+
+function GenerateFen(){
+	var rank = RANKS.RANK_8;
+    var file = FILES.FILE_A;
+    var count = 1;
+	var sq120 = 0;
+	var fen = "";
+	var fenChar = '';
+	
+	while ((rank >= RANKS.RANK_1)) {
+		sq120 = FR2SQ(file,rank);
+		fenChar = PceChar[GameBoard.pieces[sq120]];
+		console.log(fenChar);
+		if (fenChar != '.'){
+			if(count > 1){
+				count -= 1;
+				fen = fen.concat(count.toString());
+				count = 1;
+			}
+			fen = fen.concat(fenChar);
+		}
+		else {
+			count += 1
+		}
+		if(file == FILES.FILE_H){
+			file = FILES.FILE_A;
+			rank--;
+			if(count > 1){
+				count -= 1;
+				fen = fen.concat(count.toString());
+				count = 1;
+			}
+			if(rank >= RANKS.RANK_1){
+				fen = fen.concat('/');
+			}
+		}
+		else{
+			file++;
+		}
+	}
+
+	//Who turn it is
+	fen = fen.concat(" ");
+	fen = fen.concat(SideChar[GameBoard.side]);
+
+	//Castling rights
+	fen = fen.concat(" ");
+	if(GameBoard.castlePerm & CASTLEBIT.WKCA){
+		fen = fen.concat("K");
+	}
+	if(GameBoard.castlePerm & CASTLEBIT.WQCA){
+		fen = fen.concat("Q");
+	}
+	if(GameBoard.castlePerm & CASTLEBIT.BKCA){
+		fen = fen.concat("k");
+	}
+	if(GameBoard.castlePerm & CASTLEBIT.BQCA){
+		fen = fen.concat("q");
+	}
+
+	//En passant square
+	fen = fen.concat(" ");
+	if(GameBoard.enPas != SQUARES.NO_SQ){
+		fen = fen.concat(PrSq(GameBoard.enPas));
+	}
+	else {
+		fen = fen.concat('-');
+	}
+	
+	console.log(fen)
+	return fen
 }
 
 function PrintSqAttacked() {
