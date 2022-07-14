@@ -21,7 +21,9 @@
 }
 
 .container {
-    display: flex;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto auto;
     width: 75%;
     max-width: 900px;
     min-width: 275px;
@@ -32,6 +34,7 @@
 .board {
     position: absolute;
     display: grid;
+    
     grid-template-columns: repeat(8,1fr);
     grid-template-rows: repeat(8,1fr);
     top: 100px;
@@ -260,7 +263,18 @@ li {
     background: yellow;
 }
 
-#whiteplayer #blackplayer{
-    position: absolute;
-    left: 70%;
+#whiteplayer{
+    grid-row: 4;
+    grid-column: 2;
+    position: relative;
+    left: -125px;
+    top: 20px;
+}
+
+#blackplayer{
+    grid-row: 1;
+    grid-column: 2;
+    position: relative;
+    top: 60px;
+    left: -125px;
 }
