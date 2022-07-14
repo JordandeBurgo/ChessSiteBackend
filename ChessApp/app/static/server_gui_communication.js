@@ -389,7 +389,7 @@ function socket_handle(){
             console.log("PLAYER 2 IS NOT NOT NULL");
             text2 = document.createTextNode(player2);
         }
-        if(text!=username){
+        if(player1!=username){
             usernames.appendChild(text);
         }
         if(text2 !== null){
