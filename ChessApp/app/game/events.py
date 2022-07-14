@@ -15,6 +15,7 @@ def join(data):
     if username is not None:
         room = data['id']
         clients.append(request.sid)
+        emit('setUsername', {'username': username}, room=clients[-1])
         join_room(room)
         room_data = json.loads(r.get(room))
         if(username not in list(room_data["users"].keys())):

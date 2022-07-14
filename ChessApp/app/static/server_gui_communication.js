@@ -327,6 +327,8 @@ function ResetBoardGUI(){
 }
 
 function socket_handle(){
+    let username;
+
     socket.on('domove', function(data){
         MoveGUIPiece(data['move']);
         MakeMove(data['move']);
@@ -363,6 +365,10 @@ function socket_handle(){
         playerTitle.appendChild(bold);
     });
 
+    socket.on('setUsername', function(data){
+        username = data['username'];
+    })
+
     socket.on('setBoard', function(data){
         NewGame(data['fen']);
     });
@@ -370,12 +376,11 @@ function socket_handle(){
     socket.on('close', function(data){
         window.location.href = "/";
     });
-
+    
     socket.on('playerConnected', function(data){
         console.log("GOT THE EMIT");
         let player1 = data['names']['player1'];
         let player2 = data['names']['player2'];
-        let copy = false;
 
         usernames = document.getElementById("names");
         text = document.createTextNode(player1);
@@ -384,13 +389,7 @@ function socket_handle(){
             console.log("PLAYER 2 IS NOT NOT NULL");
             text2 = document.createTextNode(player2);
         }
-        for(let i in usernames.children){
-            if(i == text){
-                copy = true;
-                break;
-            }
-        }
-        if(!copy){
+        if(text!=username){
             usernames.appendChild(text);
         }
         if(text2 !== null){
