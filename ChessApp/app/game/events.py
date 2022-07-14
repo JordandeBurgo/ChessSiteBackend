@@ -21,12 +21,12 @@ def join(data):
             if(len(room_data["users"].keys()) == 0):
                 colour = round(random.random())
                 room_data["connectedPlayers"].append(username)
-                emit('playerConnected', {'names': {'player1': username, 'player2': None}})
+                emit('playerConnected', {'names': {'player1': username, 'player2': None}}, room=room)
             elif(len(room_data["users"].keys()) == 1):
                 player1 = list(room_data["users"].keys())[0]
                 colour = 0 if bool(room_data["users"][player1]) else 1
                 room_data["connectedPlayers"].append(username)
-                emit('playerConnected', {'names': {'player1': player1, 'player2': username}})
+                emit('playerConnected', {'names': {'player1': player1, 'player2': username}}, room=room)
             else:
                 player1 = list(room_data["users"].keys())[0]
                 player2 = list(room_data["users"].keys())[1]
