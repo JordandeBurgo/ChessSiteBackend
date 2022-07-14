@@ -259,3 +259,8 @@ li {
 .hover {
     background: yellow;
 }
+
+#whiteplayer #blackplayer{
+    position: absolute;
+    left: 70%;
+}
