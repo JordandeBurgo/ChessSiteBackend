@@ -70,16 +70,16 @@ function setup(){
         }
     }
 
-    num = 0;
-    let num2 = 1;
+    //num = 0;
+    //let num2 = 1;
 
-    for (let i = 0; i <= 63; i++) {
-        boardRep[i] = letters[num] + (num2);
-        num++;
-        if(num === 8){
-            num2++; num = 0;
-        }
-    }
+    //for (let i = 0; i <= 63; i++) {
+    //    boardRep[i] = letters[num] + (num2);
+    //    num++;
+    //    if(num === 8){
+    //        num2++; num = 0;
+    //    }
+    //}
 
     // let whitepawns = ['a2', 'b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2'];
     // let whiterooks = ['a1', 'h1'];

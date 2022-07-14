@@ -367,9 +367,6 @@ function socket_handle(){
 
     socket.on('setUsername', function(data){
         username = data['username'];
-        text = document.createTextNode(username);
-        usernames = document.getElementById("names");
-        usernames.appendChild(text);
     })
 
     socket.on('setBoard', function(data){
@@ -385,19 +382,30 @@ function socket_handle(){
         let player1 = data['names']['player1'];
         let player2 = data['names']['player2'];
 
-        usernames = document.getElementById("names");
-        text = document.createTextNode(player1);
+        whiteplayer = document.getElementById("whiteplayer");
+        blackplayer = document.getElementById("blackplayer");
+        text = document.createTextNode(player1[0]);
         text2 = null;
         if(player2 != null){
             console.log("PLAYER 2 IS NOT NOT NULL");
-            text2 = document.createTextNode(player2);
+            text2 = document.createTextNode(player2[0]);
         }
-        if(player1!=username){
-            usernames.appendChild(text);
+        if(player1[1] == COLOURS.WHITE){
+            if(whiteplayer.firstChild == null)
+                whiteplayer.appendChild(text);
         }
+        else{
+            if(blackplayer.firstChild == null)
+                blackplayer.appendChild(text);
+        }    
         if(text2 !== null){
-            if(player2!=username){
-                usernames.appendChild(text2);
+            if(player2[1] == COLOURS.WHITE){
+                if(whiteplayer.firstChild == null)
+                    whiteplayer.appendChild(text2);
+            }
+            else{
+                if(blackplayer.firstChild == null)
+                    blackplayer.appendChild(text2);
             }
         }
     });
