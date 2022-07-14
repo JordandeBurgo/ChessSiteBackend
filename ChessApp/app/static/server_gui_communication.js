@@ -372,8 +372,8 @@ function socket_handle(){
     });
 
     socket.on('playerConnected', function(data){
-        let player1 = data['player1'];
-        let player2 = data['player2'];
+        let player1 = data['names']['player1'];
+        let player2 = data['names']['player2'];
         let copy = false;
 
         usernames = document.getElementById("names");
