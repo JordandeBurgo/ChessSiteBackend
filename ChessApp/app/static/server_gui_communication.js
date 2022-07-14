@@ -370,4 +370,25 @@ function socket_handle(){
     socket.on('close', function(data){
         window.location.href = "/";
     });
+
+    socket.on('playerConnected', function(data){
+        let player1 = data['player1'];
+        let player2 = data['player2'];
+        let copy = false;
+
+        usernames = document.getElementById("names");
+        text = document.createTextNode(player1);
+        if(player2 != null){
+            text2 = document.createTextNode(player2);
+        }
+        for(let i in usernames.children){
+            if(i == text){
+                copy = true;
+            }
+        }
+        if(!copy){
+            usernames.appendChild(text);
+        }
+        usernames.appendChild(text2);
+    });
 }
