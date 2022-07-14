@@ -378,6 +378,7 @@ function socket_handle(){
 
         usernames = document.getElementById("names");
         text = document.createTextNode(player1);
+        text2 = null;
         if(player2 != null){
             text2 = document.createTextNode(player2);
         }
@@ -389,6 +390,8 @@ function socket_handle(){
         if(!copy){
             usernames.appendChild(text);
         }
-        usernames.appendChild(text2);
+        if(text2 !== null){
+            usernames.appendChild(text2);
+        }
     });
 }
