@@ -372,6 +372,7 @@ function socket_handle(){
     });
 
     socket.on('playerConnected', function(data){
+        console.log("GOT THE EMIT");
         let player1 = data['names']['player1'];
         let player2 = data['names']['player2'];
         let copy = false;
@@ -380,11 +381,13 @@ function socket_handle(){
         text = document.createTextNode(player1);
         text2 = null;
         if(player2 != null){
+            console.log("PLAYER 2 IS NOT NOT NULL");
             text2 = document.createTextNode(player2);
         }
         for(let i in usernames.children){
             if(i == text){
                 copy = true;
+                break;
             }
         }
         if(!copy){
