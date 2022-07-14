@@ -367,6 +367,9 @@ function socket_handle(){
 
     socket.on('setUsername', function(data){
         username = data['username'];
+        text = document.createTextNode(username);
+        usernames = document.getElementById("names");
+        usernames.appendChild(text);
     })
 
     socket.on('setBoard', function(data){
@@ -393,7 +396,9 @@ function socket_handle(){
             usernames.appendChild(text);
         }
         if(text2 !== null){
-            usernames.appendChild(text2);
+            if(player2!=username){
+                usernames.appendChild(text2);
+            }
         }
     });
 }
