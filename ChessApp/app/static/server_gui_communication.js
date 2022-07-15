@@ -392,7 +392,9 @@ function socket_handle(){
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
         var span = document.getElementsByClassName("close")[0];
-        var button = document.getElementById("leave");
+        var button = document.getElementsByClassName("leave")[0];
+        var winner = document.getElementById("winner");
+        text = document.createTextNode();
         span.onclick = function() {
             modal.style.display = "none";
         }
