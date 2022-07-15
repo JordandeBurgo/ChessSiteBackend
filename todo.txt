@@ -4,7 +4,7 @@
 
 //Make sure that the correct user is moving
 
-Make the user leave the room at the end of the game - add a forfeit button
+//Make the user leave the room at the end of the game - add a forfeit button
     - Got a disconnect function running and how to see who is disconnecting, can use this to
       check if both *playing* clients have disconnected, if they have boot everyone (spectators)
       out the room and delete room data from redis. Perhaps keep a "connected users" key in redis
@@ -15,7 +15,7 @@ Make the user leave the room at the end of the game - add a forfeit button
       of the board, when a user makes a move the one square becomes hidden and the other becomes
       visible
 
-**Add end of game popup
+//Add end of game popup
 
 //Make it so that a room name becomes the link for the room
     - This is instead of all rooms being in "/game" and rooms being stored only in session data
@@ -49,6 +49,8 @@ Play a sound on a move + possibly add an animation for if you didnt drag/recieve
 
 Be able to view previous boards, but bring back to the actual board and only able to play on actual
 board
+
+Add something to allow you to view previous games you have played
 
 ??Flip board capability - autoflip for black - seeingly simple but actually A LOT of work
 
