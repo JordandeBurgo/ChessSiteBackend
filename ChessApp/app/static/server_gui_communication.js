@@ -388,12 +388,18 @@ function socket_handle(){
     });
 
     socket.on('endgame', function(data){
+        player = -1;
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
         var span = document.getElementsByClassName("close")[0];
+        var button = document.getElementById("leave");
         span.onclick = function() {
             modal.style.display = "none";
         }
+        button.onclick = function() {
+            window.location.href = "/";
+        }
+
     });
     
     socket.on('playerConnected', function(data){
