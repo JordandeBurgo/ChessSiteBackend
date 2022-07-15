@@ -77,7 +77,7 @@ def gameover(loser):
             if playerCol != ler:
                 winner = i
         if losers[0] == losers[1] and winner != -1:
-            emit('endgame', {'loser': winner}, room=room)
+            emit('endgame', {'winner': winner}, room=room)
 
 
 @socketio.on('disconnect', namespace='/game')

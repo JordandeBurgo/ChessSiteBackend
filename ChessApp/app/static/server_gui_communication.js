@@ -394,7 +394,9 @@ function socket_handle(){
         var span = document.getElementsByClassName("close")[0];
         var button = document.getElementsByClassName("leave")[0];
         var winner = document.getElementById("winner");
-        text = document.createTextNode();
+        var winString = data['winner'] + " has won!"
+        text = document.createTextNode(winString);
+        winner.appendChild(text);
         span.onclick = function() {
             modal.style.display = "none";
         }
