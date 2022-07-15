@@ -1,3 +1,6 @@
+from tkinter.font import names
+from xml.dom.expatbuilder import Namespaces
+from ChessApp.app import game
 from flask import session, request
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
@@ -8,6 +11,7 @@ import random
 
 r = redis.from_url(os.environ['REDISCLOUD_URL'])
 clients = []
+losers = []
 
 @socketio.on('join', namespace='/game')
 def join(data):
@@ -61,6 +65,16 @@ def movedone(board):
     if room_data['boardstates'][-1] != board['board']:
         room_data['boardstates'].append(board['board'])
         r.set(room, json.dumps(room_data))
+
+@socketio.on('gameover', namespace='/game')
+def gameover(loser):
+    room = session.get('room')
+    ler = loser['loser']
+    losers.append(ler)
+    if len(losers) == 2:
+        if losers[0] == losers[1]:
+            emit('endgame', {'loser': ler}, room=room)
+
 
 @socketio.on('disconnect', namespace='/game')
 def disconnected():

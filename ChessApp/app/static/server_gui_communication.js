@@ -343,7 +343,10 @@ function socket_handle(){
         socket.emit('movedone', {'board':GenerateFen()});
         PrintBoard();
         GenerateMoves();
-        GenerateLegalMoves();
+        let lg = GenerateLegalMoves();
+        if(lg.length == 0 && (player == COLOURS.WHITE || player == COLOURS.BLACK )){
+            socket.emit('gameover', {'loser': GameBoard.side});
+        }
     });
 
     socket.on('setPlayer', function(data){
@@ -375,6 +378,15 @@ function socket_handle(){
 
     socket.on('close', function(data){
         window.location.href = "/";
+    });
+
+    socket.on('endgame', function(data){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
     });
     
     socket.on('playerConnected', function(data){
