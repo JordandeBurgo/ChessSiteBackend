@@ -344,7 +344,13 @@ function socket_handle(){
         PrintBoard();
         GenerateMoves();
         let lg = GenerateLegalMoves();
-        if(lg.length == 0 && (player == COLOURS.WHITE || player == COLOURS.BLACK )){
+        console.log(lg);
+        if(lg.length == 0){
+            console.log("NO LEGAL MOVES");
+            console.log(player);
+        }
+        if(lg.length == 0 && (player == COLOURS.WHITE || player == COLOURS.BLACK)){
+            console.log("EMITTING GAME OVER!");
             socket.emit('gameover', {'loser': GameBoard.side});
         }
     });
