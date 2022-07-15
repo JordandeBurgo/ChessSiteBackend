@@ -1,5 +1,3 @@
-from tkinter.font import names
-from xml.dom.expatbuilder import Namespaces
 from ChessApp.app import game
 from flask import session, request
 from flask_socketio import emit, join_room, leave_room
