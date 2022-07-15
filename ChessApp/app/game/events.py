@@ -67,11 +67,17 @@ def movedone(board):
 @socketio.on('gameover', namespace='/game')
 def gameover(loser):
     room = session.get('room')
+    room_data = json.loads(r.get(room))
     ler = loser['loser']
+    winner = -1
     losers.append(ler)
     if len(losers) == 2:
-        if losers[0] == losers[1]:
-            emit('endgame', {'loser': ler}, room=room)
+        for i in room_data["connectedPlayers"]:
+            playerCol = room_data['users'][i]
+            if playerCol != ler:
+                winner = i
+        if losers[0] == losers[1] and winner != -1:
+            emit('endgame', {'loser': winner}, room=room)
 
 
 @socketio.on('disconnect', namespace='/game')
