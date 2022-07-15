@@ -343,7 +343,8 @@ function socket_handle(){
         socket.emit('movedone', {'board':GenerateFen()});
         PrintBoard();
         GenerateMoves();
-        let lg = GenerateLegalMoves();
+        GenerateLegalMoves();
+        let lg = GameBoard.legalMoveList;
         console.log(lg);
         if(lg.length == 0){
             console.log("NO LEGAL MOVES");
