@@ -444,12 +444,13 @@ function resetNames(){
 function flipCoords(){
     boardletters.innerHTML = '';
     boardnumbers.innerHTML = '';
-    for (let i = 8; i > 0; i--) {
+    let num = 1;
+    for (let i = 7; i >= 0; i--) {
         let letter = document.createElement("li");
         letter.textContent = letters[i];
         boardletters.appendChild(letter);
         let numbers = document.createElement("li");
-        numbers.textContent = num--;
+        numbers.textContent = num++;
         boardnumbers.appendChild(numbers);
     }
 }
