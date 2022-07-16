@@ -401,6 +401,7 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
+            SetInitialBoardPieces();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
