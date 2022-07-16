@@ -310,7 +310,7 @@ function MoveGUIPiece(move){
 
     //remove piece
     RemovePieceFromGUI(flippedFrom);
-    pce = GameBoard.pieces[flippedFrom];
+    pce = GameBoard.pieces[from];
     //add piece to new destination
     AddPieceToGUI(flippedTo, pce);
 
