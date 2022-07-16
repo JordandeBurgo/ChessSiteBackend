@@ -288,6 +288,8 @@ function MoveGUIPiece(move){
     var epBlack = 10;
 
     if(GameBoard.BoardFlipped == BOOL.TRUE){
+        flippedFrom = MIRROR120(from);
+        flippedTo = MIRROR120(to);
         epWhite = 10;
         epBlack = -10;
     }
