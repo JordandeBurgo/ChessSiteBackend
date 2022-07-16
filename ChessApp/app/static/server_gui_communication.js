@@ -121,7 +121,7 @@ function ClickedSquare(sq){
         //Set possible squares
         let legalMovesSq = GenerateLegalMovesSq(elSquare);
         for(let possiblesquare of legalMovesSq){
-            if(GameBoard.BoardFlipped){
+            if(GameBoard.BoardFlipped == BOOL.TRUE){
                 document.querySelector("." + Mirror[possiblesquare.toUpperCase()].toLowerCase()).classList.add("possibleMove");
             }
             else {
