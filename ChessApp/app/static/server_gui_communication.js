@@ -45,11 +45,14 @@ function SetInitialBoardPieces(){
 			sq120 = MIRROR120(sq120);
 		}
 
+        console.log(sq120);
+
         file = FilesBrd[sq120];
         rank = RanksBrd[sq120];
 
         if(pce >= PIECES.wP && pce <= PIECES.bK){
             rankFileName = letters[file] + (rank+1);
+            console.log(rankFileName);
             pceFileName = "/static/assets/" + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + ".png";
             let img = document.createElement("img");
             img.setAttribute("draggable", false);
