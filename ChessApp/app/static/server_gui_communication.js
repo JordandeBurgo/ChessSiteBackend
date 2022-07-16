@@ -410,8 +410,15 @@ function ResetBoardGUI(){
 function resetNames(){
     $("whiteplayer").empty();
     $("blackplayer").empty();
-    whiteplayer = document.getElementById("whiteplayer");
-    blackplayer = document.getElementById("blackplayer");
+    if(GameBoard.BoardFlipped == BOOL.FALSE){
+        whiteplayer = document.getElementById("whiteplayer");
+        blackplayer = document.getElementById("blackplayer");
+    }
+    else {
+        blackplayer = document.getElementById("whiteplayer");
+        whiteplayer = document.getElementById("blackplayer");
+    }
+    
     text = document.createTextNode(player1[0]);
     text2 = null;
     if(player2 != null){
@@ -471,11 +478,7 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
-            div1 = jQuery('#whiteplayer');
-            div2 = jQuery('#blackplayer');
-            div1.attr("id", "blackplayer");
-            div2.attr("id", "whiteplayer");
-            //resetNames();
+            resetNames();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
@@ -525,8 +528,15 @@ function socket_handle(){
         player1 = data['names']['player1'];
         player2 = data['names']['player2'];
 
-        whiteplayer = document.getElementById("whiteplayer");
-        blackplayer = document.getElementById("blackplayer");
+        if(GameBoard.BoardFlipped == BOOL.FALSE){
+            whiteplayer = document.getElementById("whiteplayer");
+            blackplayer = document.getElementById("blackplayer");
+        }
+        else {
+            blackplayer = document.getElementById("whiteplayer");
+            whiteplayer = document.getElementById("blackplayer");
+        }
+        
         text = document.createTextNode(player1[0]);
         text2 = null;
         if(player2 != null){
