@@ -408,6 +408,8 @@ function ResetBoardGUI(){
 }
 
 function resetNames(){
+    $("whiteplayer").empty();
+    $("blackplayer").empty();
     whiteplayer = document.getElementById("whiteplayer");
     blackplayer = document.getElementById("blackplayer");
     text = document.createTextNode(player1[0]);
@@ -417,21 +419,17 @@ function resetNames(){
         text2 = document.createTextNode(player2[0]);
     }
     if(player1[1] == COLOURS.WHITE){
-        if(whiteplayer.firstChild == null)
-            whiteplayer.appendChild(text);
+        whiteplayer.appendChild(text);
     }
     else{
-        if(blackplayer.firstChild == null)
-            blackplayer.appendChild(text);
+        blackplayer.appendChild(text);
     }    
     if(text2 !== null){
         if(player2[1] == COLOURS.WHITE){
-            if(whiteplayer.firstChild == null)
-                whiteplayer.appendChild(text2);
+            whiteplayer.appendChild(text2);
         }
         else{
-            if(blackplayer.firstChild == null)
-                blackplayer.appendChild(text2);
+            blackplayer.appendChild(text2);
         }
     }
 }
