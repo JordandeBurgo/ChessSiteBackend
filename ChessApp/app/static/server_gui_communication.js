@@ -478,7 +478,6 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
-            resetNames();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
@@ -490,6 +489,7 @@ function socket_handle(){
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
+        resetNames();
     });
 
     socket.on('setUsername', function(data){
