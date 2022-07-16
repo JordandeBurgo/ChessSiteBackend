@@ -477,7 +477,6 @@ function socket_handle(){
             div2 = jQuery('#blackplayer');
             div1.attr("id", "blackplayer");
             div2.attr("id", "whiteplayer");
-            resetNames();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
@@ -489,6 +488,7 @@ function socket_handle(){
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
+        resetNames();
     });
 
     socket.on('setUsername', function(data){
