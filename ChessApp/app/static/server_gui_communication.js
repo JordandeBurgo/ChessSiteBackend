@@ -489,7 +489,6 @@ function socket_handle(){
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
-        resetNames();
     });
 
     socket.on('setUsername', function(data){
@@ -524,7 +523,8 @@ function socket_handle(){
     });
     
     socket.on('playerConnected', function(data){
-        console.log("GOT THE EMIT");
+        $("#whiteplayer").empty();
+        $("#blackplayer").empty();
         player1 = data['names']['player1'];
         player2 = data['names']['player2'];
 
@@ -544,21 +544,17 @@ function socket_handle(){
             text2 = document.createTextNode(player2[0]);
         }
         if(player1[1] == COLOURS.WHITE){
-            if(whiteplayer.firstChild == null)
-                whiteplayer.appendChild(text);
+            whiteplayer.appendChild(text);
         }
         else{
-            if(blackplayer.firstChild == null)
-                blackplayer.appendChild(text);
+            blackplayer.appendChild(text);
         }    
         if(text2 !== null){
             if(player2[1] == COLOURS.WHITE){
-                if(whiteplayer.firstChild == null)
-                    whiteplayer.appendChild(text2);
+                whiteplayer.appendChild(text2);
             }
             else{
-                if(blackplayer.firstChild == null)
-                    blackplayer.appendChild(text2);
+                blackplayer.appendChild(text2);
             }
         }
     });

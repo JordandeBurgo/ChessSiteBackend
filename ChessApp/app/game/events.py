@@ -41,6 +41,12 @@ def join(data):
             print(colour)
         else:
             colour = room_data["users"][username]
+            if(len(room_data["users"].keys()) == 1):
+                emit('playerConnected', {'names': {'player1': [username, colour], 'player2': None}}, room=room)
+            else:
+                player1 = list(room_data["users"].keys())[0]
+                player2 = list(room_data["users"].keys())[1]
+                emit('playerConnected', {'names': {'player1': [player1, room_data["users"][player1]], 'player2': [player2, room_data["users"][player1]]}}, room=clients[-1])
             if colour != -1:
                 room_data["connectedPlayers"].append(username)
                 r.set(room, json.dumps(room_data))
