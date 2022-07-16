@@ -96,7 +96,7 @@ function ClickedSquare(sq){
             $(".active").removeClass("active");
             $(".possibleMove").removeClass("possibleMove");
         }
-        else if(PrSq(UserMove.to) != elSquare){
+        else if(PrSq(UserMove.to) != properties[0]){
             promotion = false;
             board.getElementsByClassName(PrSq(UserMove.from))[0].firstChild.style.visibility = 'visible';
             UserMove.from = SQUARES.NO_SQ;
@@ -106,7 +106,7 @@ function ClickedSquare(sq){
             $(".possibleMove").removeClass("possibleMove")
             UserMove.from = esq;
             sq.classList.add("active");
-            let legalMovesSq = GenerateLegalMovesSq(elSquare);
+            let legalMovesSq = GenerateLegalMovesSq(properties[0]);
             for(let possiblesquare of legalMovesSq){
                 document.querySelector("." + possiblesquare).classList.add("possibleMove");
             }
@@ -119,7 +119,7 @@ function ClickedSquare(sq){
         //Set the active square
         sq.classList.add("active");
         //Set possible squares
-        let legalMovesSq = GenerateLegalMovesSq(elSquare);
+        let legalMovesSq = GenerateLegalMovesSq(properties[0]);
         for(let possiblesquare of legalMovesSq){
             document.querySelector("." + possiblesquare).classList.add("possibleMove");
         }
@@ -163,7 +163,7 @@ function ClickedSquare(sq){
         //Set the active square
         sq.classList.add("active");
         //Set possible squares
-        let legalMovesSq = GenerateLegalMovesSq(elSquare);
+        let legalMovesSq = GenerateLegalMovesSq(properties[0]);
         for(let possiblesquare of legalMovesSq){
             document.querySelector("." + possiblesquare).classList.add("possibleMove");
         }
