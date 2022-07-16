@@ -304,14 +304,14 @@ function MoveGUIPiece(move){
 
     var flippedFrom = from;
     var flippedTo = to;
-    var epWhite = -10;
-    var epBlack = 10;
+    var epWhite = 10;
+    var epBlack = -10;
 
     if(GameBoard.BoardFlipped == BOOL.TRUE){
         flippedFrom = MIRROR120(from);
         flippedTo = MIRROR120(to);
-        epWhite = 10;
-        epBlack = -10;
+        epWhite = -10;
+        epBlack = 10;
     }
 
     if(move & MFLAGEP) {
