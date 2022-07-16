@@ -1126,10 +1126,7 @@ function check(boardArray){
 }
 */
 
-function generatePromotionMenu(activeSquare, square){
-    classList2 = activeSquare.classList.toString();
-    let properties = classList2.split(" ");
-
+function generatePromotionMenu(square){
     let content = document.createElement("div");
     content.setAttribute('id','dropdown');
     SideChar[GameBoard.side] == "b" ? content.classList.add("dropup-content") : content.classList.add("dropdown-content") ;

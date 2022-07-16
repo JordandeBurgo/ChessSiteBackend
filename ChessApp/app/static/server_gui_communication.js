@@ -96,7 +96,7 @@ function ClickedSquare(sq){
             $(".active").removeClass("active");
             $(".possibleMove").removeClass("possibleMove");
         }
-        else if(PrSq(UserMove.to) != properties[0]){
+        else if(PrSq(UserMove.to) != elSquare){
             promotion = false;
             board.getElementsByClassName(PrSq(UserMove.from))[0].firstChild.style.visibility = 'visible';
             UserMove.from = SQUARES.NO_SQ;
@@ -106,9 +106,14 @@ function ClickedSquare(sq){
             $(".possibleMove").removeClass("possibleMove")
             UserMove.from = esq;
             sq.classList.add("active");
-            let legalMovesSq = GenerateLegalMovesSq(properties[0]);
+            let legalMovesSq = GenerateLegalMovesSq(elSquare);
             for(let possiblesquare of legalMovesSq){
-                document.querySelector("." + possiblesquare).classList.add("possibleMove");
+                if(GameBoard.BoardFlipped == BOOL.TRUE){
+                    document.querySelector("." + Mirror[possiblesquare.toUpperCase()].toLowerCase()).classList.add("possibleMove");
+                }
+                else {
+                    document.querySelector("." + possiblesquare).classList.add("possibleMove");
+                }
             }
         }
         console.log(promoPce);
@@ -140,7 +145,7 @@ function ClickedSquare(sq){
         if((SideChar[GameBoard.side] == "w" && PceChar[GameBoard.pieces[UserMove.from]] == "P" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 8)
         || (SideChar[GameBoard.side] == "b" && PceChar[GameBoard.pieces[UserMove.from]] == "p" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 1)){
             promotion = true;
-            generatePromotionMenu(document.getElementsByClassName(PrSq(UserMove.from))[0], sq);
+            generatePromotionMenu(sq);
         }
         else {
             if(parsed != NOMOVE){
@@ -171,9 +176,14 @@ function ClickedSquare(sq){
         //Set the active square
         sq.classList.add("active");
         //Set possible squares
-        let legalMovesSq = GenerateLegalMovesSq(properties[0]);
+        let legalMovesSq = GenerateLegalMovesSq(elSquare);
         for(let possiblesquare of legalMovesSq){
-            document.querySelector("." + possiblesquare).classList.add("possibleMove");
+            if(GameBoard.BoardFlipped == BOOL.TRUE){
+                document.querySelector("." + Mirror[possiblesquare.toUpperCase()].toLowerCase()).classList.add("possibleMove");
+            }
+            else {
+                document.querySelector("." + possiblesquare).classList.add("possibleMove");
+            }
         }
         click = !click;
     }
@@ -279,6 +289,9 @@ function AddPieceToGUI(sq, pce){
 }
 
 function MoveGUIPiece(move){
+
+    //EN PASSANT NOT WORKING GUI SIDE
+
     var from = FROMSQ(move);
     var to = TOSQ(move);
 
