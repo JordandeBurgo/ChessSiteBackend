@@ -142,21 +142,18 @@ function ClickedSquare(sq){
         UserMove.to = esq;
         //make the move
         var parsed = ParseMoveHuman(UserMove.from, UserMove.to);
-        if(GameBoard.BoardFlipped == BOOL.TRUE){
-            if((SideChar[GameBoard.side] == "w" && PceChar[GameBoard.pieces[UserMove.from]] == "P" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 1)
-            || (SideChar[GameBoard.side] == "b" && PceChar[GameBoard.pieces[UserMove.from]] == "p" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 8)){
-                promotion = true;
-                generatePromotionMenu(sq);
-            }
+        if(GameBoard.BoardFlipped == BOOL.FALSE 
+        && (SideChar[GameBoard.side] == "w" && PceChar[GameBoard.pieces[UserMove.from]] == "P" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 8)
+        || (SideChar[GameBoard.side] == "b" && PceChar[GameBoard.pieces[UserMove.from]] == "p" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 1)){
+            promotion = true;
+            generatePromotionMenu(sq);
         }
-        else{
-            if((SideChar[GameBoard.side] == "w" && PceChar[GameBoard.pieces[UserMove.from]] == "P" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 8)
-            || (SideChar[GameBoard.side] == "b" && PceChar[GameBoard.pieces[UserMove.from]] == "p" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 1)){
-                promotion = true;
-                generatePromotionMenu(sq);
-            }
+        else if(GameBoard.BoardFlipped == BOOL.TRUE 
+        && (SideChar[GameBoard.side] == "w" && PceChar[GameBoard.pieces[UserMove.from]] == "P" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 1)
+        || (SideChar[GameBoard.side] == "b" && PceChar[GameBoard.pieces[UserMove.from]] == "p" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 8)){
+            promotion = true;
+            generatePromotionMenu(sq);
         }
-
         else {
             if(parsed != NOMOVE){
                 socket.emit('moved', {'move': parsed});
