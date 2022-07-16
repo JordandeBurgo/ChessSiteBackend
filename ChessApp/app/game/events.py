@@ -9,7 +9,6 @@ import random
 
 r = redis.from_url(os.environ['REDISCLOUD_URL'])
 clients = []
-losers = []
 
 @socketio.on('join', namespace='/game')
 def join(data):
@@ -82,7 +81,9 @@ def gameover(loser):
     room_data = json.loads(r.get(room))
     ler = loser['loser']
     winner = -1
+    losers = room_data['losers']
     losers.append(ler)
+    r.set(room, json.dumps(room_data))
     if len(losers) == 2:
         for i in room_data["connectedPlayers"]:
             playerCol = room_data['users'][i]
@@ -90,6 +91,7 @@ def gameover(loser):
                 winner = i
         if losers[0] == losers[1] and winner != -1:
             emit('endgame', {'winner': winner}, room=room)
+
 
 
 @socketio.on('disconnect', namespace='/game')

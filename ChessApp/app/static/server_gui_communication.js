@@ -422,7 +422,7 @@ function resetNames(){
     text = document.createTextNode(player1[0]);
     text2 = null;
     if(player2 != null){
-        console.log("PLAYER 2 IS NOT NOT NULL");
+        console.log("PLAYER 2 IS NOT NULL");
         text2 = document.createTextNode(player2[0]);
     }
     if(player1[1] == COLOURS.WHITE){

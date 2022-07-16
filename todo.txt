@@ -58,5 +58,7 @@ Add something to allow you to view previous games you have played
 
 //Add list of people in room to html
 
+Add a grpahic of what pieces have been taken
+
 BUG: When you scroll down the page there is some errors with highlighting the correct squares when dragging a piece
-BUG... WEIRD ONE: Clicking pieces is broken only on firefox but also only in local games 
+BUG... WEIRD ONE: Clicking pieces is broken only on firefox but also only in local games... I have absolutely no clue why
