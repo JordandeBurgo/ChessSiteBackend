@@ -489,7 +489,6 @@ function socket_handle(){
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
-        resetNames();
     });
 
     socket.on('setUsername', function(data){
@@ -521,6 +520,10 @@ function socket_handle(){
             window.location.href = "/";
         }
 
+    });
+
+    socket.on('reset', function(data){
+        resetNames();
     });
     
     socket.on('playerConnected', function(data){

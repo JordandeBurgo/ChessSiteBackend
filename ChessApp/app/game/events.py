@@ -14,6 +14,7 @@ losers = []
 @socketio.on('join', namespace='/game')
 def join(data):
     username = session.get("username")
+    resetNames = False
     if username is not None:
         room = data['id']
         clients.append(request.sid)
@@ -30,6 +31,7 @@ def join(data):
                 colour = 0 if bool(room_data["users"][player1]) else 1
                 room_data["connectedPlayers"].append(username)
                 emit('playerConnected', {'names': {'player1': [player1, room_data["users"][player1]], 'player2': [username, colour]}}, room=room)
+                resetNames = True
             else:
                 player1 = list(room_data["users"].keys())[0]
                 player2 = list(room_data["users"].keys())[1]
@@ -52,6 +54,10 @@ def join(data):
                 r.set(room, json.dumps(room_data))
         emit('setPlayer', {'player': colour}, room=clients[-1])
         emit('setBoard', {'fen': room_data["boardstates"][-1]}, room=clients[-1])
+        if resetNames:
+            emit('reset', {}, room=room)
+        else:
+            emit('reset', {}, room=clients[-1])
         print("SOMEONE JOINED THE ROOM")
 
 @socketio.on('moved', namespace='/game')
