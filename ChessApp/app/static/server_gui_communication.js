@@ -408,8 +408,8 @@ function ResetBoardGUI(){
 }
 
 function resetNames(){
-    $("whiteplayer").html('');
-    $("blackplayer").html('');
+    $("#whiteplayer").empty();
+    $("#blackplayer").empty();
     if(GameBoard.BoardFlipped == BOOL.FALSE){
         whiteplayer = document.getElementById("whiteplayer");
         blackplayer = document.getElementById("blackplayer");
