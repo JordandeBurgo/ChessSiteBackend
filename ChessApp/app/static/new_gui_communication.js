@@ -120,7 +120,7 @@ function ClickedSquare(sq){
         if((SideChar[GameBoard.side] == "w" && PceChar[GameBoard.pieces[UserMove.from]] == "P" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 8)
         || (SideChar[GameBoard.side] == "b" && PceChar[GameBoard.pieces[UserMove.from]] == "p" && parseInt(sq.classList.toString().split(" ")[2][1], 10) === 1)){
             promotion = true;
-            generatePromotionMenu(document.getElementsByClassName(PrSq(UserMove.from))[0], sq);
+            generatePromotionMenu(sq);
         }
         else {
             if(parsed != NOMOVE){
