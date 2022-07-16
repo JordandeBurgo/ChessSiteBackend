@@ -1,9 +1,6 @@
 var MirrorFiles = [ FILES.FILE_H, FILES.FILE_G, FILES.FILE_F, FILES.FILE_E, FILES.FILE_D, FILES.FILE_C, FILES.FILE_B, FILES.FILE_A ];
 var MirrorRanks = [ RANKS.RANK_8, RANKS.RANK_7, RANKS.RANK_6, RANKS.RANK_5, RANKS.RANK_4, RANKS.RANK_3, RANKS.RANK_2, RANKS.RANK_1 ];
 
-let player1;
-let player2;
-
 function MIRROR120(sq) {
 	var file = MirrorFiles[FilesBrd[sq]];
 	var rank = MirrorRanks[RanksBrd[sq]];
@@ -525,8 +522,8 @@ function socket_handle(){
     socket.on('playerConnected', function(data){
         $("#whiteplayer").empty();
         $("#blackplayer").empty();
-        player1 = data['names']['player1'];
-        player2 = data['names']['player2'];
+        let player1 = data['names']['player1'];
+        let player2 = data['names']['player2'];
 
         if(GameBoard.BoardFlipped == BOOL.FALSE){
             whiteplayer = document.getElementById("whiteplayer");
@@ -536,7 +533,7 @@ function socket_handle(){
             blackplayer = document.getElementById("whiteplayer");
             whiteplayer = document.getElementById("blackplayer");
         }
-
+        
         text = document.createTextNode(player1[0]);
         text2 = null;
         if(player2 != null){
