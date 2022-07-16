@@ -52,10 +52,11 @@ board
 
 Add something to allow you to view previous games you have played
 
-??Flip board capability - autoflip for black - seeingly simple but actually A LOT of work
+//Flip board capability - autoflip for black - seeingly simple but actually A LOT of work
 
 ??Make sure that the move from the client is valid on the server
 
 //Add list of people in room to html
 
 BUG: When you scroll down the page there is some errors with highlighting the correct squares when dragging a piece
+BUG... WEIRD ONE: Clicking pieces is broken only on firefox but also only in local games 

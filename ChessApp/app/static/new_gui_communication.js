@@ -35,14 +35,8 @@ function SetInitialBoardPieces(){
     for(sq = 0; sq < 64; ++sq){
         sq120 = SQ120(sq);
         pce = GameBoard.pieces[sq120];
-
-        if(GameBoard.BoardFlipped == BOOL.TRUE) {
-			sq120 = MIRROR120(sq120);
-		}
-
         file = FilesBrd[sq120];
         rank = RanksBrd[sq120];
-
         if(pce >= PIECES.wP && pce <= PIECES.bK){
             rankFileName = letters[file] + (rank+1);
             pceFileName = "/static/assets/" + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + ".png";
