@@ -266,7 +266,7 @@ function dragStart(ev){
 
         function onMouseMove(event) {
             moveAt(event.pageX, event.pageY);
-            let hoverElems = document.elementsFromPoint(event.pageX, event.pageY);
+            /*let hoverElems = document.elementsFromPoint(event.pageX, event.pageY);
             for(let i of hoverElems){
                 if(i.classList.contains("square")){
                     hoverElem = i;
@@ -287,7 +287,7 @@ function dragStart(ev){
                     $(".hover").removeClass("hover");
                     removedHoverElems = true;
                 }
-            }
+            }*/
 
             /*hoverElem.classList.add('hover');
             if(prevHoverElem !== hoverElem){
