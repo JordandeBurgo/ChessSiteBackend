@@ -41,6 +41,8 @@ function SetInitialBoardPieces(){
         sq120 = SQ120(sq);
         pce = GameBoard.pieces[sq120];
 
+        console.log(pce);
+
         if(GameBoard.BoardFlipped == BOOL.TRUE) {
 			sq120 = MIRROR120(sq120);
 		}
