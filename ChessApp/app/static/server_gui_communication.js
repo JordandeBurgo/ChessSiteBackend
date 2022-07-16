@@ -1,6 +1,9 @@
 var MirrorFiles = [ FILES.FILE_H, FILES.FILE_G, FILES.FILE_F, FILES.FILE_E, FILES.FILE_D, FILES.FILE_C, FILES.FILE_B, FILES.FILE_A ];
 var MirrorRanks = [ RANKS.RANK_8, RANKS.RANK_7, RANKS.RANK_6, RANKS.RANK_5, RANKS.RANK_4, RANKS.RANK_3, RANKS.RANK_2, RANKS.RANK_1 ];
 
+let player1;
+let player2;
+
 function MIRROR120(sq) {
 	var file = MirrorFiles[FilesBrd[sq]];
 	var rank = MirrorRanks[RanksBrd[sq]];
@@ -404,6 +407,35 @@ function ResetBoardGUI(){
     NewGame(START_FEN);
 }
 
+function resetNames(){
+    whiteplayer = document.getElementById("whiteplayer");
+    blackplayer = document.getElementById("blackplayer");
+    text = document.createTextNode(player1[0]);
+    text2 = null;
+    if(player2 != null){
+        console.log("PLAYER 2 IS NOT NOT NULL");
+        text2 = document.createTextNode(player2[0]);
+    }
+    if(player1[1] == COLOURS.WHITE){
+        if(whiteplayer.firstChild == null)
+            whiteplayer.appendChild(text);
+    }
+    else{
+        if(blackplayer.firstChild == null)
+            blackplayer.appendChild(text);
+    }    
+    if(text2 !== null){
+        if(player2[1] == COLOURS.WHITE){
+            if(whiteplayer.firstChild == null)
+                whiteplayer.appendChild(text2);
+        }
+        else{
+            if(blackplayer.firstChild == null)
+                blackplayer.appendChild(text2);
+        }
+    }
+}
+
 function socket_handle(){
     let username;
 
@@ -444,12 +476,9 @@ function socket_handle(){
             GameBoard.BoardFlipped ^= 1;
             div1 = jQuery('#whiteplayer');
             div2 = jQuery('#blackplayer');
-            tdiv1 = div1.clone();
-	        tdiv2 = div2.clone();
-            div1.replaceWith(tdiv2);
-		    div2.replaceWith(tdiv1);	
             div1.attr("id", "blackplayer");
             div2.attr("id", "whiteplayer");
+            resetNames();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
@@ -495,8 +524,8 @@ function socket_handle(){
     
     socket.on('playerConnected', function(data){
         console.log("GOT THE EMIT");
-        let player1 = data['names']['player1'];
-        let player2 = data['names']['player2'];
+        player1 = data['names']['player1'];
+        player2 = data['names']['player2'];
 
         whiteplayer = document.getElementById("whiteplayer");
         blackplayer = document.getElementById("blackplayer");
