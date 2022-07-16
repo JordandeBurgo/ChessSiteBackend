@@ -441,6 +441,19 @@ function resetNames(){
     }
 }
 
+function flipCoords(){
+    boardletters.innerHTML = '';
+    boardnumbers.innerHTML = '';
+    for (let i = 8; i > 0; i--) {
+        let letter = document.createElement("li");
+        letter.textContent = letters[i];
+        boardletters.appendChild(letter);
+        let numbers = document.createElement("li");
+        numbers.textContent = num--;
+        boardnumbers.appendChild(numbers);
+    }
+}
+
 function socket_handle(){
     let username;
 
@@ -478,6 +491,7 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
+            flipCoords();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
