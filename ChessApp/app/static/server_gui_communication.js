@@ -69,8 +69,8 @@ function SetInitialBoardPieces(){
 function ClickedSquare(sq){
     theClassList = sq.classList.toString();
     let properties = theClassList.split(" ");
-    let elSquare = properties[0];
     properties.splice(0,2);
+    let elSquare = properties[0];
     let file_name = "FILE_" + properties[0][0].toUpperCase();
     let file = FILES[file_name];
     let rank_name = "RANK_" + properties[0][1].toUpperCase();
@@ -119,7 +119,7 @@ function ClickedSquare(sq){
         //Set the active square
         sq.classList.add("active");
         //Set possible squares
-        let legalMovesSq = GenerateLegalMovesSq(properties[0]);
+        let legalMovesSq = GenerateLegalMovesSq(elSquare);
         for(let possiblesquare of legalMovesSq){
             document.querySelector("." + possiblesquare).classList.add("possibleMove");
         }
