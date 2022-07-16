@@ -1,6 +1,9 @@
 var MirrorFiles = [ FILES.FILE_H, FILES.FILE_G, FILES.FILE_F, FILES.FILE_E, FILES.FILE_D, FILES.FILE_C, FILES.FILE_B, FILES.FILE_A ];
 var MirrorRanks = [ RANKS.RANK_8, RANKS.RANK_7, RANKS.RANK_6, RANKS.RANK_5, RANKS.RANK_4, RANKS.RANK_3, RANKS.RANK_2, RANKS.RANK_1 ];
 
+let player1;
+let player2;
+
 function MIRROR120(sq) {
 	var file = MirrorFiles[FilesBrd[sq]];
 	var rank = MirrorRanks[RanksBrd[sq]];
@@ -475,7 +478,6 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
-            resetNames();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
@@ -487,6 +489,7 @@ function socket_handle(){
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
+        resetNames();
     });
 
     socket.on('setUsername', function(data){
@@ -521,39 +524,7 @@ function socket_handle(){
     });
     
     socket.on('playerConnected', function(data){
-        $("#whiteplayer").empty();
-        $("#blackplayer").empty();
-        let player1 = data['names']['player1'];
-        let player2 = data['names']['player2'];
-
-        if(GameBoard.BoardFlipped == BOOL.FALSE){
-            whiteplayer = document.getElementById("whiteplayer");
-            blackplayer = document.getElementById("blackplayer");
-        }
-        else {
-            blackplayer = document.getElementById("whiteplayer");
-            whiteplayer = document.getElementById("blackplayer");
-        }
-        
-        text = document.createTextNode(player1[0]);
-        text2 = null;
-        if(player2 != null){
-            console.log("PLAYER 2 IS NOT NOT NULL");
-            text2 = document.createTextNode(player2[0]);
-        }
-        if(player1[1] == COLOURS.WHITE){
-            whiteplayer.appendChild(text);
-        }
-        else{
-            blackplayer.appendChild(text);
-        }    
-        if(text2 !== null){
-            if(player2[1] == COLOURS.WHITE){
-                whiteplayer.appendChild(text2);
-            }
-            else{
-                blackplayer.appendChild(text2);
-            }
-        }
+        player1 = data['names']['player1'];
+        player2 = data['names']['player2'];
     });
 }
