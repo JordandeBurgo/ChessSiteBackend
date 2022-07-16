@@ -20,6 +20,7 @@ GameBoard.moveList = new Array(MAXDEPTH * MAXPOSITIONMOVES);
 GameBoard.moveScores = new Array(MAXDEPTH * MAXPOSITIONMOVES);
 GameBoard.moveListStart = new Array(MAXDEPTH);
 GameBoard.legalMoveList = [];
+GameBoard.BoardFlipped = BOOL.FALSE;
 
 /*
 CASTLING MADE EASY

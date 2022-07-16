@@ -72,6 +72,26 @@ var CastleKeys = new Array(16);
 var Sq120ToSq64 = new Array(BRD_SQ_NUM);
 var Sq64ToSq120 = new Array(64);
 
+var Mirror64 = [
+	56	,	57	,	58	,	59	,	60	,	61	,	62	,	63	,
+	48	,	49	,	50	,	51	,	52	,	53	,	54	,	55	,
+	40	,	41	,	42	,	43	,	44	,	45	,	46	,	47	,
+	32	,	33	,	34	,	35	,	36	,	37	,	38	,	39	,
+	24	,	25	,	26	,	27	,	28	,	29	,	30	,	31	,
+	16	,	17	,	18	,	19	,	20	,	21	,	22	,	23	,
+	8	,	9	,	10	,	11	,	12	,	13	,	14	,	15	,
+	0	,	1	,	2	,	3	,	4	,	5	,	6	,	7
+];
+
+var Mirror = { A1:'H8', A2:'H7', A3:'H6', A4:'H5', A5:'H4', A6:'H3', A7:'H2', A8:'H1',
+			   B1:'G8', B2:'G7', B3:'G6', B4:'G5', B5:'G4', B6:'G3', B7:'G2', B8:'G1',
+			   C1:'F8', C2:'F7', C3:'F6', C4:'F5', C5:'F4', C6:'F3', C7:'F2', C8:'F1',
+			   D1:'E8', D2:'E7', D3:'E6', D4:'E5', D5:'E4', D6:'E3', D7:'E2', D8:'E1',
+			   E1:'D8', E2:'D7', E3:'D6', E4:'D5', E5:'D4', E6:'D3', E7:'D2', E8:'D1',
+			   F1:'C8', F2:'C7', F3:'C6', F4:'C5', F5:'C4', F6:'C3', F7:'C2', F8:'C1',
+			   G1:'B8', G2:'B7', G3:'B6', G4:'B5', G5:'B4', G6:'B3', G7:'B2', G8:'B1',
+			   H1:'A8', H2:'A7', H3:'A6', H4:'A5', H5:'A4', H6:'A3', H7:'A2', H8:'A1' };
+
 function RAND_32(){
     return (Math.floor((Math.random()*255)+1) << 23) | (Math.floor((Math.random()*255)+1) << 16)
          | (Math.floor((Math.random()*255)+1) << 8) | Math.floor((Math.random()*255)+1);
@@ -83,6 +103,10 @@ function SQ64(sq120) {
 
 function SQ120(sq64) {
     return Sq64ToSq120[(sq64)];
+}
+
+function MIRROR64(sq) {
+	return Mirror64[sq];
 }
 
 function PCEINDEX(pce, pceNum) {

@@ -1,3 +1,12 @@
+var MirrorFiles = [ FILES.FILE_H, FILES.FILE_G, FILES.FILE_F, FILES.FILE_E, FILES.FILE_D, FILES.FILE_C, FILES.FILE_B, FILES.FILE_A ];
+var MirrorRanks = [ RANKS.RANK_8, RANKS.RANK_7, RANKS.RANK_6, RANKS.RANK_5, RANKS.RANK_4, RANKS.RANK_3, RANKS.RANK_2, RANKS.RANK_1 ];
+
+function MIRROR120(sq) {
+	var file = MirrorFiles[FilesBrd[sq]];
+	var rank = MirrorRanks[RanksBrd[sq]];
+	return FR2SQ(file,rank);
+}
+
 function NewGame(fenStr) {
     ParseFen(fenStr);
     PrintBoard();
@@ -49,12 +58,17 @@ function SetInitialBoardPieces(){
 function ClickedSquare(sq){
     theClassList = sq.classList.toString();
     let properties = theClassList.split(" ");
+    let elSquare = properties[0];
     properties.splice(0,2);
     let file_name = "FILE_" + properties[0][0].toUpperCase();
     let file = FILES[file_name];
     let rank_name = "RANK_" + properties[0][1].toUpperCase();
     let rank = RANKS[rank_name];
     let esq = FR2SQ(file,rank);
+
+    if(GameBoard.BoardFlipped == BOOL.TRUE){
+        esq = MIRROR120(esq);
+    }
 
     if(promotion){
         let promoPce = sq.classList[sq.classList.length - 1];
@@ -248,37 +262,60 @@ function MoveGUIPiece(move){
     var from = FROMSQ(move);
     var to = TOSQ(move);
 
+    var flippedFrom = from;
+    var flippedTo = to;
+    var epWhite = -10;
+    var epBlack = 10;
+
+    if(GameBoard.BoardFlipped == BOOL.TRUE){
+        flippedFrom = MIRROR120(from);
+        flippedTo = MIRROR120(to);
+        epWhite = 10;
+        epBlack = -10;
+    }
+
     if(move & MFLAGEP) {
         var epRemove;
         if(GameBoard.side == COLOURS.BLACK){
-            epRemove = to+10;
+            epRemove = flippedTo+epWhite;
         }
         else {
-            epRemove = to-10;
+            epRemove = flippedTo+epBlack;
         }
         RemovePieceFromGUI(epRemove);
     }
     else if (CAPTURED(move)){
-        RemovePieceFromGUI(to);
+        RemovePieceFromGUI(flippedTo);
     }
 
     //remove piece
-    RemovePieceFromGUI(from);
-    pce = GameBoard.pieces[from];
+    RemovePieceFromGUI(flippedFrom);
+    pce = GameBoard.pieces[flippedFrom];
     //add piece to new destination
-    AddPieceToGUI(to, pce);
+    AddPieceToGUI(flippedTo, pce);
 
     if(move & MFLAGCA){
-        switch(to){
-            case SQUARES.G1: RemovePieceFromGUI(SQUARES.H1); AddPieceToGUI(SQUARES.F1, PIECES.wR); break;
-            case SQUARES.C1: RemovePieceFromGUI(SQUARES.A1); AddPieceToGUI(SQUARES.D1, PIECES.wR); break;
-            case SQUARES.G8: RemovePieceFromGUI(SQUARES.H8); AddPieceToGUI(SQUARES.F8, PIECES.bR); break;
-            case SQUARES.C8: RemovePieceFromGUI(SQUARES.A8); AddPieceToGUI(SQUARES.D8, PIECES.bR); break;
+        if(GameBoard.BoardFlipped == BOOL.TRUE){
+            switch(to){
+                case SQUARES.G1: RemovePieceFromGUI(MIRROR120(SQUARES.H1)); AddPieceToGUI(MIRROR120(SQUARES.F1), PIECES.wR); break;
+                case SQUARES.C1: RemovePieceFromGUI(MIRROR120(SQUARES.A1)); AddPieceToGUI(MIRROR120(SQUARES.D1), PIECES.wR); break;
+                case SQUARES.G8: RemovePieceFromGUI(MIRROR120(SQUARES.H8)); AddPieceToGUI(MIRROR120(SQUARES.F8), PIECES.bR); break;
+                case SQUARES.C8: RemovePieceFromGUI(MIRROR120(SQUARES.A8)); AddPieceToGUI(MIRROR120(SQUARES.D8), PIECES.bR); break;
+            }
         }
+        else {
+            switch(to){
+                case SQUARES.G1: RemovePieceFromGUI(SQUARES.H1); AddPieceToGUI(SQUARES.F1, PIECES.wR); break;
+                case SQUARES.C1: RemovePieceFromGUI(SQUARES.A1); AddPieceToGUI(SQUARES.D1, PIECES.wR); break;
+                case SQUARES.G8: RemovePieceFromGUI(SQUARES.H8); AddPieceToGUI(SQUARES.F8, PIECES.bR); break;
+                case SQUARES.C8: RemovePieceFromGUI(SQUARES.A8); AddPieceToGUI(SQUARES.D8, PIECES.bR); break;
+            }
+        }
+
     }
     else if(PROMOTED(move)){
-        RemovePromotionPieceFromGUI(to, pce);
-        AddPieceToGUI(to, PROMOTED(move));
+        RemovePromotionPieceFromGUI(flippedTo, pce);
+        AddPieceToGUI(flippedTo, PROMOTED(move));
     }
     
 }
@@ -363,6 +400,7 @@ function socket_handle(){
         text = document.createTextNode("YOU ARE ");
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
+            GameBoard.BoardFlipped ^= 1;
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
