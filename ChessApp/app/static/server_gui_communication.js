@@ -475,7 +475,7 @@ function socket_handle(){
             div2 = jQuery('#blackplayer');
             div1.attr("id", "blackplayer");
             div2.attr("id", "whiteplayer");
-            resetNames();
+            //resetNames();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
