@@ -79,7 +79,7 @@ function ClickedSquare(sq){
 
     if(GameBoard.BoardFlipped == BOOL.TRUE){
         esq = MIRROR120(esq);
-        elSquare = Mirror[elSquare.toUpperCase()];
+        elSquare = Mirror[elSquare.toUpperCase()].toLowerCase();
     }
 
     if(promotion){
@@ -120,6 +120,8 @@ function ClickedSquare(sq){
         sq.classList.add("active");
         //Set possible squares
         let legalMovesSq = GenerateLegalMovesSq(elSquare);
+        console.log(elSquare);
+        console.log(legalMovesSq);
         for(let possiblesquare of legalMovesSq){
             if(GameBoard.BoardFlipped == BOOL.TRUE){
                 document.querySelector("." + Mirror[possiblesquare.toUpperCase()].toLowerCase()).classList.add("possibleMove");
