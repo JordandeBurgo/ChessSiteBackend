@@ -442,6 +442,14 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
+            div1 = jQuery('#whiteplayer');
+            div2 = jQuery('#blackplayer');
+            tdiv1 = div1.clone();
+	        tdiv2 = div2.clone();
+            div1.replaceWith(tdiv2);
+		    div2.replaceWith(tdiv1);	
+            div1.attr("id", "blackplayer");
+            div2.attr("id", "whiteplayer");
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
