@@ -317,10 +317,10 @@ function MoveGUIPiece(move){
     if(move & MFLAGEP) {
         var epRemove;
         if(GameBoard.side == COLOURS.BLACK){
-            epRemove = to+epWhite;
+            epRemove = flippedTo+epWhite;
         }
         else {
-            epRemove = to+epBlack;
+            epRemove = flippedTo+epBlack;
         }
         console.log("en pas removing from " + PrSq(epRemove));
         RemovePieceFromGUI(epRemove);
