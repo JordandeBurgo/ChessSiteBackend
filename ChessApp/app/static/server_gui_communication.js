@@ -470,7 +470,6 @@ function socket_handle(){
         player = data['player'];
         playerTitle = document.getElementById("playerTitle");
         bold = document.createElement('strong');
-        text = document.createTextNode("YOU ARE ");
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
@@ -486,6 +485,7 @@ function socket_handle(){
         else{
             playerTitleName = document.createTextNode("A SPECTATOR");
         }
+        text = document.createTextNode("YOU ARE ");
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
