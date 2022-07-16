@@ -58,5 +58,4 @@ Add something to allow you to view previous games you have played
 
 //Add list of people in room to html
 
-BUG: Emails are in the wrong place when board is flipped
 BUG: When you scroll down the page there is some errors with highlighting the correct squares when dragging a piece
