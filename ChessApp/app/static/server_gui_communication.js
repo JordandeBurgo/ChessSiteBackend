@@ -408,8 +408,8 @@ function ResetBoardGUI(){
 }
 
 function resetNames(){
-    $("whiteplayer").empty();
-    $("blackplayer").empty();
+    $("whiteplayer").html('');
+    $("blackplayer").html('');
     if(GameBoard.BoardFlipped == BOOL.FALSE){
         whiteplayer = document.getElementById("whiteplayer");
         blackplayer = document.getElementById("blackplayer");
@@ -536,7 +536,7 @@ function socket_handle(){
             blackplayer = document.getElementById("whiteplayer");
             whiteplayer = document.getElementById("blackplayer");
         }
-        
+
         text = document.createTextNode(player1[0]);
         text2 = null;
         if(player2 != null){
