@@ -79,6 +79,7 @@ function ClickedSquare(sq){
 
     if(GameBoard.BoardFlipped == BOOL.TRUE){
         esq = MIRROR120(esq);
+        elSquare = Mirror[elSquare.toUpperCase()];
     }
 
     if(promotion){
@@ -95,7 +96,7 @@ function ClickedSquare(sq){
             $(".active").removeClass("active");
             $(".possibleMove").removeClass("possibleMove");
         }
-        else if(PrSq(UserMove.to) != properties[0]){
+        else if(PrSq(UserMove.to) != elSquare){
             promotion = false;
             board.getElementsByClassName(PrSq(UserMove.from))[0].firstChild.style.visibility = 'visible';
             UserMove.from = SQUARES.NO_SQ;
@@ -105,7 +106,7 @@ function ClickedSquare(sq){
             $(".possibleMove").removeClass("possibleMove")
             UserMove.from = esq;
             sq.classList.add("active");
-            let legalMovesSq = GenerateLegalMovesSq(properties[0]);
+            let legalMovesSq = GenerateLegalMovesSq(elSquare);
             for(let possiblesquare of legalMovesSq){
                 document.querySelector("." + possiblesquare).classList.add("possibleMove");
             }
@@ -118,7 +119,7 @@ function ClickedSquare(sq){
         //Set the active square
         sq.classList.add("active");
         //Set possible squares
-        let legalMovesSq = GenerateLegalMovesSq(properties[0]);
+        let legalMovesSq = GenerateLegalMovesSq(elSquare);
         for(let possiblesquare of legalMovesSq){
             document.querySelector("." + possiblesquare).classList.add("possibleMove");
         }
@@ -162,7 +163,7 @@ function ClickedSquare(sq){
         //Set the active square
         sq.classList.add("active");
         //Set possible squares
-        let legalMovesSq = GenerateLegalMovesSq(properties[0]);
+        let legalMovesSq = GenerateLegalMovesSq(elSquare);
         for(let possiblesquare of legalMovesSq){
             document.querySelector("." + possiblesquare).classList.add("possibleMove");
         }
@@ -412,7 +413,6 @@ function socket_handle(){
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
             GameBoard.BoardFlipped ^= 1;
-            SetInitialBoardPieces();
         }
         else if(player == 0){
             playerTitleName = document.createTextNode("WHITE");
