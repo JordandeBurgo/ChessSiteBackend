@@ -1129,7 +1129,14 @@ function check(boardArray){
 function generatePromotionMenu(square){
     let content = document.createElement("div");
     content.setAttribute('id','dropdown');
-    SideChar[GameBoard.side] == "b" ? content.classList.add("dropup-content") : content.classList.add("dropdown-content") ;
+
+    if(GameBoard.BoardFlipped == BOOL.FALSE){
+        SideChar[GameBoard.side] == "b" ? content.classList.add("dropup-content") : content.classList.add("dropdown-content") ;
+    }
+    else {
+        SideChar[GameBoard.side] == "w" ? content.classList.add("dropup-content") : content.classList.add("dropdown-content") ;
+    }
+    
     
     let menuOptionKnight = document.createElement("div");
     menuOptionKnight.setAttribute('id', 'night');
