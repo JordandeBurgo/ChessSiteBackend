@@ -1,6 +1,7 @@
 $(function() {
 	init();
 	NewGame(START_FEN);
+	sfx = new sound("soundeffect.mp3")
 });
 
 function InitFilesRanksBrd() {
