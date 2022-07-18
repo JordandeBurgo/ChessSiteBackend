@@ -16,8 +16,6 @@ let click = false;
 let mouseU = false;
 let prevclick = ""; //useless
 let player = COLOURS.BOTH;
-
-var sfx;
     
 for (let i = 0; i < 8; i++) {
     let letter = document.createElement("li");
