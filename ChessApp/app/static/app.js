@@ -17,7 +17,7 @@ let mouseU = false;
 let prevclick = ""; //useless
 let player = COLOURS.BOTH;
 
-let sound = new sound("soundeffect.mp3");
+var sound = new sound("soundeffect.mp3");
     
 for (let i = 0; i < 8; i++) {
     let letter = document.createElement("li");
