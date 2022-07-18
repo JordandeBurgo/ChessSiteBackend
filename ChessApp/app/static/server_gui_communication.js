@@ -470,6 +470,7 @@ function socket_handle(){
             document.getElementById("blacktoken").style.visibility = "visible";
         }
         socket.emit('movedone', {'board':GenerateFen()});
+        sound.play();
         PrintBoard();
         GenerateMoves();
         GenerateLegalMoves();

@@ -16,6 +16,8 @@ let click = false;
 let mouseU = false;
 let prevclick = ""; //useless
 let player = COLOURS.BOTH;
+
+let sound = new sound("soundeffect.mp3");
     
 for (let i = 0; i < 8; i++) {
     let letter = document.createElement("li");
@@ -362,7 +364,6 @@ function dragStart(ev){
 }
 
 /*
-
 function addImage(square, pieceName){
     let img = document.createElement("img");
     img.setAttribute("draggable", false);
@@ -375,5 +376,4 @@ function addImage(square, pieceName){
     }
     square.appendChild(img);
 }
-
 */
