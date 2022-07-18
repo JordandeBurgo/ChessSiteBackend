@@ -1,5 +1,6 @@
 $(function() {
 	init();
+	sfx = new sound("soundeffect.mp3");
 });
 
 function InitFilesRanksBrd() {
