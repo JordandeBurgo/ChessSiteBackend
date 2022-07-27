@@ -23,6 +23,7 @@ def register():
         if error is None:
             user_info = {"username": email, "password": generate_password_hash(password)}
             setuser = r.setnx(email, json.dumps(user_info))
+            r.setnx("users", json.dumps([]))
             if setuser == 0:
                 error = f"User {email} is already registered."
             else:
@@ -46,6 +47,9 @@ def login():
         if error is None:
             session.clear()     
             session['username'] = email
+            userlist = json.loads(r.get("users"))
+            userlist.append(email)
+            r.set("users", json.dumps(userlist))
             return redirect(url_for('index'))
         flash(error)
     return render_template('auth/login.html')
@@ -61,5 +65,8 @@ def load_logged_in_user():
 
 @auth.route('/logout')
 def logout():
+    userlist = json.loads(r.get("users"))
+    userlist.remove(session.get('username'))
+    r.set("users", json.dumps(userlist))
     session.clear()
     return redirect(url_for('index'))
