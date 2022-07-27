@@ -9,6 +9,7 @@
             <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
             <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('game.room') }}">Play</a></li>
+            <li><a href="{{ url_for('users.onlineusers') }}">Online Users</a></li>
         {% else %}
             <li><a href="{{ url_for('auth.register') }}">Register</a>
             <li><a href="{{ url_for('auth.login') }}">Log In</a>

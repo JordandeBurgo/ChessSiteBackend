@@ -45,7 +45,9 @@ Make it so challenges create random rooms rather than the user choosing a room n
 
 Confirm email address for signup
 
-Play a sound on a move + possibly add an animation for if you didnt drag/recieved a move
+//Play a sound on a move
+
+Possibly add an animation for if you didnt drag/recieved a move
 
 Be able to view previous boards, but bring back to the actual board and only able to play on actual
 board
