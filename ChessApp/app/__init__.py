@@ -22,6 +22,8 @@ def create_app(test_config=None):
     app.register_blueprint(auth_blueprint)
     from .game import game as game_blueprint
     app.register_blueprint(game_blueprint)
+    from .user import user as users_blueprint
+    app.register_blueprint(users_blueprint)
 
     app.add_url_rule('/', endpoint='index')
 
