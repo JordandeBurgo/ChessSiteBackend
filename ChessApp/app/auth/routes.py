@@ -23,7 +23,6 @@ def register():
         if error is None:
             user_info = {"username": email, "password": generate_password_hash(password)}
             setuser = r.setnx(email, json.dumps(user_info))
-            r.setnx("users", json.dumps([]))
             if setuser == 0:
                 error = f"User {email} is already registered."
             else:
