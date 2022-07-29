@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
 <nav>
-    <ul>
+    <ul class = "navbar">
         {% if g.user %}
-            <li class = "navbar"><span>{{ g.user['username'] }}</span>
-            <li class = "navbar"><a href="{{ url_for('auth.logout') }}">Log Out</a>
+            <li class = "navbar"><a href=""><span>{{ g.user['username'] }}</span></a></li>
+            <li class = "navbar"><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
             <li class = "navbar"><a href="{{ url_for('index') }}">Home</a></li>
             <li class = "navbar"><a href="{{ url_for('game.room') }}">Play</a></li>
             <li class = "navbar"><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
@@ -17,8 +17,8 @@
                 </a>
             </li>
         {% else %}
-            <li><a href="{{ url_for('auth.register') }}">Register</a>
-            <li><a href="{{ url_for('auth.login') }}">Log In</a>
+            <li class = "navbar"><a href="{{ url_for('auth.register') }}">Register</a></li>
+            <li class = "navbar"><a href="{{ url_for('auth.login') }}">Log In</a></li>
         {% endif %}
     </ul>
     
