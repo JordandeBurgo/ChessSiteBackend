@@ -37,6 +37,10 @@ def create_app(test_config=None):
 @socketio.on('my event')
 def test_connect(data):
     print("Client Connected")
+    if session.get("username") is not None:
+        userlist = json.loads(r.get("users"))
+        userlist.append(session.get('username'))
+        r.set("users", json.dumps(userlist))
 
 @socketio.on('disconnect')
 def test_disconnect():

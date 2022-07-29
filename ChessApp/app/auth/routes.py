@@ -46,9 +46,6 @@ def login():
         if error is None:
             session.clear()     
             session['username'] = email
-            userlist = json.loads(r.get("users"))
-            userlist.append(email)
-            r.set("users", json.dumps(userlist))
             return redirect(url_for('index'))
         flash(error)
     return render_template('auth/login.html')
