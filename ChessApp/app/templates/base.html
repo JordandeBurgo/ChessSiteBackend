@@ -27,8 +27,8 @@
     <script type="text/javascript" charset="utf-8">
         var socketg = io();
         console.log(socketg);
-        socket.on('connect', function() {
-            socket.emit('my event', {data: 'I\'m connected!'});
+        socketg.on('connect', function() {
+            socketg.emit('my event', {data: 'I\'m connected!'});
             console.log("CONNECTING");
         });
     </script>
