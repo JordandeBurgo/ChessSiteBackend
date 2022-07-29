@@ -15,6 +15,11 @@ function socket_handle(){
         for(let i of onlineusers){
             let friend = document.createElement("li");
             friend.appendChild(document.createTextNode(i));
+            let btn = document.createElement("button");
+            btn.onclick = function () {
+                socketg.emit('challenge', {"userf": i});
+            };
+            friend.appendChild(btn);
             userDiv.appendChild(friend);
         }
     });
