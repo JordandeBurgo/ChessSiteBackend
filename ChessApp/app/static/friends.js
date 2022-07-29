@@ -20,7 +20,7 @@ function socket_handle(){
                 btn.innerHTML = "Challenge!";
                 btn.id = "chalBtn";
                 btn.onclick = function () {
-                    socketg.emit('challenge', {"userf": i});
+                    socketg.emit('challenge', {"usert": i});
                 };
                 friend.appendChild(btn);
                 userDiv.appendChild(friend);

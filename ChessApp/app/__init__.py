@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, session, request
-from flask_socketio import SocketIO
+from flask_socketio import emit, SocketIO
 from flask_session import Session
 import json
 import redis
@@ -50,3 +50,13 @@ def test_disconnect():
         userlist = json.loads(r.get("users"))
         del userlist[session.get('username')]
         r.set("users", json.dumps(userlist))
+
+@socketio.on('challenge')
+def challenge(data):
+    userlist = json.loads(r.get("users"))
+    sidsend = userlist[data["usert"]]
+    userf = session.get("username")
+    user = json.loads(r.get(data["usert"]))
+    user['challenges'].append(userf)
+    r.set(data["usert"], json.dumps(user))
+    emit('challenged', {"challenger": userf}, room=sidsend)

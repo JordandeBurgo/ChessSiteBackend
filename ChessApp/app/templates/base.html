@@ -46,6 +46,9 @@
             socketg.emit('my event', {data: 'I\'m connected!'});
             console.log("CONNECTING");
         });
+        socketg.on('challenged', function(data){
+            console.log("YOU HAVE BEEN CHALLENGED!");    
+        });
     </script>
     <script>
         function myFunction() {
