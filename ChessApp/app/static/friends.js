@@ -12,7 +12,7 @@ function socket_handle(){
         onlineusers = data["usernames"];
         userDiv = document.getElementById("friendlist");
         console.log(onlineusers);
-        for(let i of onlineusers){
+        for(let i in onlineusers){
             let friend = document.createElement("li");
             friend.appendChild(document.createTextNode(i));
             let btn = document.createElement("button");
