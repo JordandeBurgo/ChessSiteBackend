@@ -25,9 +25,11 @@
     {% endfor %}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-        var socket = io();
+        var socketg = io();
+        console.log(socketg);
         socket.on('connect', function() {
             socket.emit('my event', {data: 'I\'m connected!'});
+            console.log("CONNECTING");
         });
     </script>
     {% block content %}{% endblock %}
