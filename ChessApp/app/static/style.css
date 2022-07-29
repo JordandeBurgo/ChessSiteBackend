@@ -328,6 +328,18 @@ li.navbar a {
     text-decoration: none;
 }
 
+li.navbar button {
+    cursor: pointer;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
 ul.navbar {
     list-style-type: none;
     margin: 0;
@@ -336,3 +348,26 @@ ul.navbar {
     background-color: #333;
 }
   
+.notification {
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  
+  .notification:hover {
+    background: green;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
