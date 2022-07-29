@@ -9,7 +9,7 @@
                 <button class="dropbtn notification" onclick="myFunction()">
                     <span>{{ g.user['username'] }}</span>
                 </button>
-                <div id="myDropdown" class="dropdown-content">
+                <div id="myDropdown" class="dropdown-content2">
                     <a href="{{ url_for('auth.logout') }}">Log Out</a>
                 </div>
             </li>
@@ -22,7 +22,7 @@
                     <span>Notifications</span>
                     <span class="badge">3</span>
                 </button>
-                <div id="myDropdown2" class="dropdown-content"></div>
+                <div id="myDropdown2" class="dropdown-content2"></div>
             </li>
         {% else %}
             <li class = "navbar"><a href="{{ url_for('auth.register') }}">Register</a></li>
