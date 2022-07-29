@@ -10,11 +10,12 @@
             <li class = "navbar"><a href="{{ url_for('index') }}">Home</a></li>
             <li class = "navbar"><a href="{{ url_for('game.room') }}">Play</a></li>
             <li class = "navbar"><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
-            <li class = "navbar" style="float:right">
-                <a href="#" class="notification">
-                    <span>Inbox</span>
+            <li class = "navbar dropdown" style="float:right">
+                <button class="dropbtn notification" onclick="myFunction()">
+                    <span>Notifications</span>
                     <span class="badge">3</span>
-                </a>
+                </button>
+                <div id="myDropdown" class="dropdown-content"></div>
             </li>
         {% else %}
             <li class = "navbar"><a href="{{ url_for('auth.register') }}">Register</a></li>
