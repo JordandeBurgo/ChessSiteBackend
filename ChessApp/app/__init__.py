@@ -34,8 +34,13 @@ def create_app(test_config=None):
 
     return app
 
+@socketio.on('my event')
+def test_connect():
+    print("Client Connected")
+
 @socketio.on('disconnect')
 def test_disconnect():
+    print("Client Disconnected")
     if g.user is not None:
         userlist = json.loads(r.get("users"))
         userlist.remove(session.get('username'))
