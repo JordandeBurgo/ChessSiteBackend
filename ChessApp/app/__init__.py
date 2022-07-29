@@ -35,7 +35,7 @@ def create_app(test_config=None):
     return app
 
 @socketio.on('my event')
-def test_connect():
+def test_connect(data):
     print("Client Connected")
 
 @socketio.on('disconnect')
