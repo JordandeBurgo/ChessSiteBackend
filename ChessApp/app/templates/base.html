@@ -5,16 +5,23 @@
 <nav>
     <ul>
         {% if g.user %}
-            <li><span>{{ g.user['username'] }}</span>
-            <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('game.room') }}">Play</a></li>
-            <li><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
+            <li class = "navbar"><span>{{ g.user['username'] }}</span>
+            <li class = "navbar"><a href="{{ url_for('auth.logout') }}">Log Out</a>
+            <li class = "navbar"><a href="{{ url_for('index') }}">Home</a></li>
+            <li class = "navbar"><a href="{{ url_for('game.room') }}">Play</a></li>
+            <li class = "navbar"><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
+            <li class = "navbar" style="float:right">
+                <a href="#" class="notification">
+                    <span>Inbox</span>
+                    <span class="badge">3</span>
+                </a>
+            </li>
         {% else %}
             <li><a href="{{ url_for('auth.register') }}">Register</a>
             <li><a href="{{ url_for('auth.login') }}">Log In</a>
         {% endif %}
     </ul>
+    
 </nav>
 <section class="content">
     <header>
