@@ -1,5 +1,5 @@
 import os
-from flask import Flask, g, session
+from flask import Flask, session
 from flask_socketio import SocketIO
 from flask_session import Session
 import json
@@ -41,7 +41,7 @@ def test_connect(data):
 @socketio.on('disconnect')
 def test_disconnect():
     print("Client Disconnected")
-    if g.user is not None:
+    if session.get("username") is not None:
         userlist = json.loads(r.get("users"))
         userlist.remove(session.get('username'))
         r.set("users", json.dumps(userlist))
