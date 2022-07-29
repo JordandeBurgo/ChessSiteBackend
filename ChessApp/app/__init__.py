@@ -1,8 +1,11 @@
 import os
-from flask import Flask, session
+from flask import Flask, g, session
 from flask_socketio import SocketIO
 from flask_session import Session
+import json
+import redis
 
+r = redis.from_url(os.environ['REDISCLOUD_URL'])
 socketio = SocketIO(cors_allowed_origins="*", logger=True, engineio_logger=True)
 
 def create_app(test_config=None):
@@ -30,3 +33,10 @@ def create_app(test_config=None):
     socketio.init_app(app)
 
     return app
+
+@socketio.on('disconnect')
+def test_disconnect():
+    if g.user is not None:
+        userlist = json.loads(r.get("users"))
+        userlist.remove(session.get('username'))
+        r.set("users", json.dumps(userlist))
