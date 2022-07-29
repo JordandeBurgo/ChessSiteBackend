@@ -53,6 +53,7 @@
         }
         
         window.onclick = function(e) {
+            console.log(e.target);
             if (!e.target.matches('.dropbtn')) {
                 var myDropdown = document.getElementById("myDropdown");
                 if (myDropdown.classList.contains('show')) {
@@ -62,7 +63,7 @@
         }
 
         //EDIT THIS ONE TO CREATE AND DISPLAY NOTIS
-        function myFunction2() {
+        /*function myFunction2() {
             document.getElementById("myDropdown2").classList.toggle("show");
         }
         
@@ -73,7 +74,7 @@
                     myDropdown.classList.remove('show');
                 }
             }
-        }
+        }*/
         </script>
     {% block content %}{% endblock %}
 </section>
