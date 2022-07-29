@@ -16,6 +16,8 @@ function socket_handle(){
             let friend = document.createElement("li");
             friend.appendChild(document.createTextNode(i));
             let btn = document.createElement("button");
+            btn.innerHTML = "Challenge!";
+            btn.id = "chalBtn";
             btn.onclick = function () {
                 socketg.emit('challenge', {"userf": i});
             };
