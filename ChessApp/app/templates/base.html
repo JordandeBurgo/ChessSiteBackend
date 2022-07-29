@@ -18,7 +18,7 @@
             <li class = "navbar"><a href="{{ url_for('game.room') }}">Play</a></li>
             <li class = "navbar"><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
             <li class = "navbar dropdown" style="float:right">
-                <button class="dropbtn2 notification" onclick="myFunction()">
+                <button class="dropbtn2 notification" onclick="myFunction2()">
                     <span>Notifications</span>
                     <span class="badge">3</span>
                 </button>
@@ -68,7 +68,7 @@
         
         window.onclick = function(e) {
           if (!e.target.matches('.dropbtn2')) {
-          var myDropdown = document.getElementById("myDropdown");
+          var myDropdown = document.getElementById("myDropdown2");
             if (myDropdown.classList.contains('show')) {
               myDropdown.classList.remove('show');
             }
