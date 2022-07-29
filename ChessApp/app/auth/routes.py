@@ -61,8 +61,5 @@ def load_logged_in_user():
 
 @auth.route('/logout')
 def logout():
-    userlist = json.loads(r.get("users"))
-    userlist.remove(session.get('username'))
-    r.set("users", json.dumps(userlist))
     session.clear()
     return redirect(url_for('index'))
