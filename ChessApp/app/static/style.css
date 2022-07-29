@@ -368,6 +368,7 @@ ul.navbar {
   
   .notification .badge {
     position: relative;
+    display: none;
     right: -4px;
     padding: 5px 10px;
     border-radius: 50%;
