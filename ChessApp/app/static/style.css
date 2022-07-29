@@ -400,3 +400,7 @@ ul.navbar {
   .show {
     display: block;
   }
+
+  span {
+    pointer-events: none;
+  }
