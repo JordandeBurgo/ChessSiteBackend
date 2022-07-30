@@ -48,6 +48,9 @@
             socketg.emit('my event', {data: 'I\'m connected!'});
             console.log("CONNECTING");
         });
+        socketg.on('setroom', function(data){
+            socketg.emit('joinroom', data);
+        });
         socketg.on('loadnotis', function(data){
             //create li element of all the notis in data and add it into myDropdown2
             chalList = data["chals"]

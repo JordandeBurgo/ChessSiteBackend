@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session, request
+from flask import Flask, session, request, redirect, url_for
 from flask_socketio import emit, SocketIO
 from flask_session import Session
 import json
@@ -67,8 +67,21 @@ def challenge(data):
 
 @socketio.on('challengeA')
 def challengeAccepted(data):
+    userlist = json.loads(r.get("users"))
+    siduser1 = userlist[data['user1']]
+    siduser2 = userlist[data['user2']]
     roomname = uuid.uuid4().hex[:6]
     print(roomname)
+    emit('setroom', {"room": roomname}, room=siduser1)
+    emit('setroom', {"room": roomname}, room=siduser2)
+
+@socketio.on('joinroom')
+def roomjoin(data):
+    room = data["room"]
+    session['room'] = room
+    room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
+    r.setnx(room, json.dumps(room_data))
+    return redirect(url_for('game.game_instance', roomname=room))
 
 @socketio.on('challengeD')
 def challengeDecline(data):
