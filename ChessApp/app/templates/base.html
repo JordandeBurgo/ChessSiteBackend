@@ -59,8 +59,11 @@
                 for(let i of chalList){
                     let parent = document.getElementById('myDropdown2');
                     let challenger = document.createElement("li");
-                    let text = i + ' has challenged you!'
-                    challenger.appendChild(document.createTextNode(text));
+                    let spanner = document.createElement("span");
+                    spanner.style = "padding: 0px 10px 0px 20px;";
+                    let text = data["challenger"] + ' has challenged you!'
+                    spanner.appendChild(document.createTextNode(text));
+                    challenger.appendChild(spanner);
                     let acceptBtn = document.createElement("button");
                     let declineBtn = document.createElement("button");
                     acceptBtn.innerHTML = "Accept";
@@ -90,8 +93,11 @@
             notibadge.style = "display:inline-block;";
             let parent = document.getElementById('myDropdown2');
             let challenger = document.createElement("li");
+            let spanner = document.createElement("span");
+            spanner.style = "padding: 0px 10px 0px 20px;";
             let text = data["challenger"] + ' has challenged you!'
-            challenger.appendChild(document.createTextNode(text));
+            spanner.appendChild(document.createTextNode(text));
+            challenger.appendChild(spanner);
             let acceptBtn = document.createElement("button");
             let declineBtn = document.createElement("button");
             acceptBtn.innerHTML = "Accept";

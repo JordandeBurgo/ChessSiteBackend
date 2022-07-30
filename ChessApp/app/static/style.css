@@ -397,6 +397,10 @@ ul.navbar {
   .dropdown-content2 a:hover {
     background-color: #ddd;
   }
+
+  .dropdown-content2 button:hover {
+    background-color: #ddd;
+  }
   
   .show {
     display: block;
