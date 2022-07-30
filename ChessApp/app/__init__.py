@@ -68,12 +68,11 @@ def challenge(data):
 @socketio.on('challengeA')
 def challengeAccepted(data):
     userlist = json.loads(r.get("users"))
-    siduser1 = userlist[data['user1']]
-    siduser2 = userlist[data['user2']]
+    siduser1 = userlist[data['userf']]
     roomname = uuid.uuid4().hex[:6]
     print(roomname)
     emit('setroom', {"room": roomname}, room=siduser1)
-    emit('setroom', {"room": roomname}, room=siduser2)
+    emit('setroom', {"room": roomname}, room=request.sid)
 
 @socketio.on('joinroom')
 def roomjoin(data):
