@@ -28,6 +28,7 @@ zipp = "==3.8.0"
 redis = "*"
 gevent = "*"
 gevent-websocket = "*"
+requests = "*"
 
 [dev-packages]
 
