@@ -2,34 +2,35 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
-<nav>
-    <ul class = "navbar">
-        {% if g.user %}
-            <li class = "navbar dropdown">
-                <button class="dropbtn notification" onclick="myFunction()">
-                    <span>{{ g.user['username'] }}</span>
-                </button>
-                <div id="myDropdown" class="dropdown-content2">
-                    <a href="{{ url_for('auth.logout') }}" style="color:black">Log Out</a>
-                </div>
-            </li>
-            
-            <li class = "navbar"><a href="{{ url_for('index') }}">Home</a></li>
-            <li class = "navbar"><a href="{{ url_for('game.room') }}">Play</a></li>
-            <li class = "navbar"><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
-            <li class = "navbar dropdown" style="float:right">
-                <button class="dropbtn2 notification" onclick="myFunction2()">
-                    <span class="notitext">Notifications</span>
-                    <span class="badge">3</span>
-                </button>
-                <div id="myDropdown2" class="dropdown-content2"></div>
-            </li>
-        {% else %}
-            <li class = "navbar"><a href="{{ url_for('auth.register') }}">Register</a></li>
-            <li class = "navbar"><a href="{{ url_for('auth.login') }}">Log In</a></li>
-        {% endif %}
-    </ul>
-    
+<nav>#
+    <div style="position: relative;">
+        <ul class = "navbar">
+            {% if g.user %}
+                <li class = "navbar dropdown">
+                    <button class="dropbtn notification" onclick="myFunction()">
+                        <span>{{ g.user['username'] }}</span>
+                    </button>
+                    <div id="myDropdown" class="dropdown-content2">
+                        <a href="{{ url_for('auth.logout') }}" style="color:black">Log Out</a>
+                    </div>
+                </li>
+                
+                <li class = "navbar"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class = "navbar"><a href="{{ url_for('game.room') }}">Play</a></li>
+                <li class = "navbar"><a href="{{ url_for('user.onlineusers') }}">Online Users</a></li>
+                <li class = "navbar dropdown" style="float:right">
+                    <button class="dropbtn2 notification" onclick="myFunction2()">
+                        <span class="notitext">Notifications</span>
+                        <span class="badge">3</span>
+                    </button>
+                    <div id="myDropdown2" class="dropdown-content2"></div>
+                </li>
+            {% else %}
+                <li class = "navbar"><a href="{{ url_for('auth.register') }}">Register</a></li>
+                <li class = "navbar"><a href="{{ url_for('auth.login') }}">Log In</a></li>
+            {% endif %}
+        </ul>
+    </div>
 </nav>
 <section class="content">
     <header>
@@ -64,7 +65,7 @@
                 };
                 declineBtn.innerHTML = "Decline";
                 declineBtn.id = "declineBtn";
-                declineBtn.stlye = "color:black";
+                declineBtn.style = "color:black";
                 declineBtn.onclick = function () {
                     socketg.emit('challengeD', {"userf": i});
                 };
@@ -90,7 +91,7 @@
             };
             declineBtn.innerHTML = "Decline";
             declineBtn.id = "declineBtn";
-            declineBtn.stlye = "color:black";
+            declineBtn.style = "color:black";
             declineBtn.onclick = function () {
                 socketg.emit('challengeD', {"userf": data["challenger"]});
             };    
