@@ -67,8 +67,14 @@ def challenge(data):
 
 @socketio.on('challengeA')
 def challengeAccepted(data):
+    usert = session.get("username")
+    userf = data["userf"]
+    user = json.loads(r.get(usert))
+    if userf in user["challenges"]:
+        user["challenges"].remove(userf)
+        r.set(usert, json.dumps(user))
     userlist = json.loads(r.get("users"))
-    siduser1 = userlist[data['userf']]
+    siduser1 = userlist[userf]
     roomname = uuid.uuid4().hex[:6]
     print(roomname)
     emit('setroom', {"room": roomname}, room=siduser1)
