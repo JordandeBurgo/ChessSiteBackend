@@ -82,11 +82,7 @@ def challengeAccepted(data):
 
 @socketio.on('joinroom')
 def roomjoin(data):
-    user = session.get("username")
-    userdata = json.loads(r.get(user))
     room = data["room"]
-    userdata["room"] = room
-    r.set(user, json.dumps(userdata))
     room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
     r.setnx(room, json.dumps(room_data))
     emit('redirect', url_for('game.game_instance', roomname=room), room = request.sid)
