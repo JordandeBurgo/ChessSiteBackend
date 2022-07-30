@@ -64,7 +64,7 @@
                 };
                 declineBtn.innerHTML = "Decline";
                 declineBtn.id = "declineBtn";
-                declineBtn.stlye = "color:black"
+                declineBtn.stlye = "color:black";
                 declineBtn.onclick = function () {
                     socketg.emit('challengeD', {"userf": i});
                 };
@@ -83,12 +83,14 @@
             let acceptBtn = document.createElement("button");
             let declineBtn = document.createElement("button");
             acceptBtn.innerHTML = "Accept";
-            acceptBtn.id = "acceptBtn";
+            acceptBtn.id = "acceptBtn"
+            acceptBtn.style = "color:black";;
             acceptBtn.onclick = function () {
                 socketg.emit('challengeA', {"userf": data["challenger"]});
             };
             declineBtn.innerHTML = "Decline";
             declineBtn.id = "declineBtn";
+            declineBtn.stlye = "color:black";
             declineBtn.onclick = function () {
                 socketg.emit('challengeD', {"userf": data["challenger"]});
             };    
