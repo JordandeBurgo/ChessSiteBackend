@@ -36,9 +36,9 @@ Add menu that allows you to choose "Local v Human, Local v Bot, or Online Human 
 
 Add game timer - and the ability to choose time control on creating a game
 
-Make it so that there is a list of online users
-    - Ability to challenge other online users
-    - Ability to view challenges
+//Make it so that there is a list of online users
+//Ability to challenge other online users
+//Ability to view challenges
 
 Ability to add friends
 
