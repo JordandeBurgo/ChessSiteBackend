@@ -5,6 +5,7 @@ from flask_socketio import emit, SocketIO
 from flask_session import Session
 import json
 import redis
+import uuid
 
 r = redis.from_url(os.environ['REDISCLOUD_URL'])
 socketio = SocketIO(cors_allowed_origins="*", logger=True, engineio_logger=True)
@@ -66,7 +67,8 @@ def challenge(data):
 
 @socketio.on('challengeA')
 def challengeAccepted(data):
-    pass
+    roomname = uuid.uuid4().hex[:6]
+    print(roomname)
 
 @socketio.on('challengeD')
 def challengeDecline(data):
