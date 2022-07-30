@@ -84,6 +84,7 @@ def challengeAccepted(data):
 def roomjoin(data):
     room = data["room"]
     session['room'] = room
+    print(session.get('room'))
     room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
     r.setnx(room, json.dumps(room_data))
     emit('redirect', url_for('game.game_instance', roomname=room), room = request.sid)
