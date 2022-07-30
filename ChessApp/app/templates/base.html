@@ -21,7 +21,7 @@
                 <li class = "navbar dropdown" style="float:right">
                     <button class="dropbtn2 notification" onclick="myFunction2()">
                         <span class="notitext">Notifications</span>
-                        <span class="badge">3</span>
+                        <span class="badge"></span>
                     </button>
                     <div id="myDropdown2" class="dropdown-content2" style="right:0;"></div>
                 </li>
@@ -42,6 +42,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         var socketg = io();
+        var notinumber = 0;
         console.log(socketg);
         socketg.on('connect', function() {
             socketg.emit('my event', {data: 'I\'m connected!'});
@@ -50,33 +51,41 @@
         socketg.on('loadnotis', function(data){
             //create li element of all the notis in data and add it into myDropdown2
             chalList = data["chals"]
-            for(let i of chalList){
-                let parent = document.getElementById('myDropdown2');
-                let challenger = document.createElement("li");
-                let text = i + ' has challenged you!'
-                challenger.appendChild(document.createTextNode(text));
-                let acceptBtn = document.createElement("button");
-                let declineBtn = document.createElement("button");
-                acceptBtn.innerHTML = "Accept";
-                acceptBtn.id = "acceptBtn";
-                acceptBtn.style = "color:black";
-                acceptBtn.onclick = function () {
-                    socketg.emit('challengeA', {"userf": i});
-                };
-                declineBtn.innerHTML = "Decline";
-                declineBtn.id = "declineBtn";
-                declineBtn.style = "color:black";
-                declineBtn.onclick = function () {
-                    socketg.emit('challengeD', {"userf": i});
-                };
-                challenger.appendChild(acceptBtn);
-                challenger.appendChild(declineBtn);
-                parent.appendChild(challenger);
+            notinumber += chalList.length;
+            if(notinumber > 0){
+                let notibadge = document.getElementsByClassName('badge')[0];
+                notibadge.innerHTML = notinumber;
+                for(let i of chalList){
+                    let parent = document.getElementById('myDropdown2');
+                    let challenger = document.createElement("li");
+                    let text = i + ' has challenged you!'
+                    challenger.appendChild(document.createTextNode(text));
+                    let acceptBtn = document.createElement("button");
+                    let declineBtn = document.createElement("button");
+                    acceptBtn.innerHTML = "Accept";
+                    acceptBtn.id = "acceptBtn";
+                    acceptBtn.style = "color:black";
+                    acceptBtn.onclick = function () {
+                        socketg.emit('challengeA', {"userf": i});
+                    };
+                    declineBtn.innerHTML = "Decline";
+                    declineBtn.id = "declineBtn";
+                    declineBtn.style = "color:black";
+                    declineBtn.onclick = function () {
+                        socketg.emit('challengeD', {"userf": i});
+                    };
+                    challenger.appendChild(acceptBtn);
+                    challenger.appendChild(declineBtn);
+                    parent.appendChild(challenger);
+                }
             }
         });
         socketg.on('challenged', function(data){
             //create li element of the new noti and add it into myDropdown2
             console.log("YOU HAVE BEEN CHALLENGED!");
+            notinumber++;
+            let notibadge = document.getElementsByClassName('badge')[0];
+            notibadge.innerHTML = notinumber;
             let parent = document.getElementById('myDropdown2');
             let challenger = document.createElement("li");
             let text = data["challenger"] + ' has challenged you!'
