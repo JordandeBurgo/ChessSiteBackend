@@ -42,6 +42,8 @@ def test_connect(data):
         userlist = json.loads(r.get("users"))
         userlist[session.get('username')] = request.sid
         r.set("users", json.dumps(userlist))
+        userchals = json.loads(r.get(session.get("username")))
+        emit('loadnotis', {"chals": userchals["challenges"]}, room=request.sid)
 
 @socketio.on('disconnect')
 def test_disconnect():
@@ -57,6 +59,7 @@ def challenge(data):
     sidsend = userlist[data["usert"]]
     userf = session.get("username")
     user = json.loads(r.get(data["usert"]))
-    user['challenges'].append(userf)
-    r.set(data["usert"], json.dumps(user))
+    if userf not in user['challenges']:
+        user['challenges'].append(userf)
+        r.set(data["usert"], json.dumps(user))
     emit('challenged', {"challenger": userf}, room=sidsend)

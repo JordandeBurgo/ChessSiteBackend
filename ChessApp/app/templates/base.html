@@ -46,8 +46,45 @@
             socketg.emit('my event', {data: 'I\'m connected!'});
             console.log("CONNECTING");
         });
+        socketg.on('loadnotis', function(data){
+            //create li element of all the notis in data and add it into myDropdown2
+            chalList = data["chals"]
+            for(let i of chalList){
+                let challenger = document.createElement("li");
+                let text = i + ' has challenged you!'
+                challenger.appendChild(document.createTextNode(text));
+                let acceptBtn = document.createElement("button");
+                let declineBtn = document.createElement("button");
+                acceptBtn.innerHTML = "Accept";
+                acceptBtn.id = "acceptBtn";
+                acceptBtn.onclick = function () {
+                    socketg.emit('challengeA', {"userf": i});
+                };
+                declineBtn.innerHTML = "Decline";
+                declineBtn.id = "declineBtn";
+                declineBtn.onclick = function () {
+                    socketg.emit('challengeD', {"userf": i});
+                };
+            }
+        });
         socketg.on('challenged', function(data){
-            console.log("YOU HAVE BEEN CHALLENGED!");    
+            //create li element of the new noti and add it into myDropdown2
+            console.log("YOU HAVE BEEN CHALLENGED!");
+            let challenger = document.createElement("li");
+            let text = data["challenger"] + ' has challenged you!'
+            challenger.appendChild(document.createTextNode(text));
+            let acceptBtn = document.createElement("button");
+            let declineBtn = document.createElement("button");
+            acceptBtn.innerHTML = "Accept";
+            acceptBtn.id = "acceptBtn";
+            acceptBtn.onclick = function () {
+                socketg.emit('challengeA', {"userf": data["challenger"]});
+            };
+            declineBtn.innerHTML = "Decline";
+            declineBtn.id = "declineBtn";
+            declineBtn.onclick = function () {
+                socketg.emit('challengeD', {"userf": data["challenger"]});
+            };    
         });
     </script>
     <script>
