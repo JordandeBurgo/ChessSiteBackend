@@ -80,7 +80,7 @@ def roomjoin(data):
     session['room'] = room
     room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
     r.setnx(room, json.dumps(room_data))
-    return redirect(url_for('game.game_instance', roomname=room))
+    emit('redirect', url_for('game.gameinstance', roomname=room), room = request.sid)
 
 @socketio.on('challengeD')
 def challengeDecline(data):

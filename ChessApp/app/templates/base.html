@@ -51,6 +51,9 @@
         socketg.on('setroom', function(data){
             socketg.emit('joinroom', data);
         });
+        socketg.on('redirect', (dest) => {
+            window.location.href = dest;
+        });
         socketg.on('loadnotis', function(data){
             //create li element of all the notis in data and add it into myDropdown2
             chalList = data["chals"]
