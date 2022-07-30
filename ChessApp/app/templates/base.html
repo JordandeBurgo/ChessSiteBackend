@@ -55,6 +55,7 @@
             if(notinumber > 0){
                 let notibadge = document.getElementsByClassName('badge')[0];
                 notibadge.innerHTML = notinumber;
+                notinumber.style = "display:block;";
                 for(let i of chalList){
                     let parent = document.getElementById('myDropdown2');
                     let challenger = document.createElement("li");
@@ -86,6 +87,7 @@
             notinumber++;
             let notibadge = document.getElementsByClassName('badge')[0];
             notibadge.innerHTML = notinumber;
+            notinumber.style = "display:block;";
             let parent = document.getElementById('myDropdown2');
             let challenger = document.createElement("li");
             let text = data["challenger"] + ' has challenged you!'
