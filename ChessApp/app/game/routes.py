@@ -1,6 +1,7 @@
 from flask import session, redirect, url_for, render_template, request
 from . import game
 from ..auth.auth import login_required
+from werkzeug.exceptions import BadRequest
 import redis
 import os
 import json
@@ -19,7 +20,11 @@ def room():
 @game.route('/game', methods=('GET', 'POST'))
 def games():
     if(request.method == 'POST'):
-        room = request.form['room']
+        try:
+            data = request.get_json()
+            room = data["room"]
+        except (TypeError, BadRequest, KeyError):
+            room = request.form['room']
         session['room'] = room
         room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
         r.setnx(room, json.dumps(room_data))
