@@ -63,3 +63,16 @@ def challenge(data):
         user['challenges'].append(userf)
         r.set(data["usert"], json.dumps(user))
     emit('challenged', {"challenger": userf}, room=sidsend)
+
+@socketio.on('challengeA')
+def challengeAccepted(data):
+    pass
+
+@socketio.on('challengeD')
+def challengeDecline(data):
+    usert = session.get("username")
+    userf = data["userf"]
+    user = json.loads(r.get(usert))
+    if userf in user["challenges"]:
+        user["challenges"].remove(userf)
+        r.set(data["usert"], json.dumps(user))
