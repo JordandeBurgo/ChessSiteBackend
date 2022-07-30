@@ -75,4 +75,4 @@ def challengeDecline(data):
     user = json.loads(r.get(usert))
     if userf in user["challenges"]:
         user["challenges"].remove(userf)
-        r.set(data["usert"], json.dumps(user))
+        r.set(usert, json.dumps(user))
