@@ -50,6 +50,7 @@
             //create li element of all the notis in data and add it into myDropdown2
             chalList = data["chals"]
             for(let i of chalList){
+                let parent = document.getElementById('myDropdown2');
                 let challenger = document.createElement("li");
                 let text = i + ' has challenged you!'
                 challenger.appendChild(document.createTextNode(text));
@@ -65,11 +66,15 @@
                 declineBtn.onclick = function () {
                     socketg.emit('challengeD', {"userf": i});
                 };
+                challenger.appendChild(acceptBtn);
+                challenger.appendChild(declineBtn);
+                parent.appendChild(challenger);
             }
         });
         socketg.on('challenged', function(data){
             //create li element of the new noti and add it into myDropdown2
             console.log("YOU HAVE BEEN CHALLENGED!");
+            let parent = document.getElementById('myDropdown2');
             let challenger = document.createElement("li");
             let text = data["challenger"] + ' has challenged you!'
             challenger.appendChild(document.createTextNode(text));
@@ -85,6 +90,9 @@
             declineBtn.onclick = function () {
                 socketg.emit('challengeD', {"userf": data["challenger"]});
             };    
+            challenger.appendChild(acceptBtn);
+            challenger.appendChild(declineBtn);
+            parent.appendChild(challenger);
         });
     </script>
     <script>
