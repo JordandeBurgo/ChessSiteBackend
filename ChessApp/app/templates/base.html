@@ -58,11 +58,13 @@
                 let declineBtn = document.createElement("button");
                 acceptBtn.innerHTML = "Accept";
                 acceptBtn.id = "acceptBtn";
+                acceptBtn.style = "color:black";
                 acceptBtn.onclick = function () {
                     socketg.emit('challengeA', {"userf": i});
                 };
                 declineBtn.innerHTML = "Decline";
                 declineBtn.id = "declineBtn";
+                declineBtn.stlye = "color:black"
                 declineBtn.onclick = function () {
                     socketg.emit('challengeD', {"userf": i});
                 };
