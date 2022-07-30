@@ -20,12 +20,7 @@ def room():
 @game.route('/game', methods=('GET', 'POST'))
 def games():
     if(request.method == 'POST'):
-        try:
-            data = request.get_json()
-            room = data["room"]
-        except (TypeError, BadRequest, KeyError):
-            room = request.form['room']
-        session['room'] = room
+        room = request.form['room']
         room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
         r.setnx(room, json.dumps(room_data))
         return redirect(url_for('game.game_instance', roomname=room))
@@ -36,9 +31,9 @@ def games():
 
 @game.route('/game/<roomname>')
 def game_instance(roomname):
+    session['room'] = roomname
     if(session.get('username') is not None):
         #todo: Check whether the user is 1 of the first 2 to join. I.e. one of the 2 players
         return render_template('game/game.html', session=session)
     #todo: Otherwise add them in as a specataor... 
-
     return redirect(url_for('index'))

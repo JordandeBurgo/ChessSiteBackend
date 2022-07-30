@@ -6,7 +6,6 @@ from flask_session import Session
 import json
 import redis
 import uuid
-import requests
 
 r = redis.from_url(os.environ['REDISCLOUD_URL'])
 socketio = SocketIO(cors_allowed_origins="*", logger=True, engineio_logger=True)
@@ -83,9 +82,13 @@ def challengeAccepted(data):
 
 @socketio.on('joinroom')
 def roomjoin(data):
+    user = session.get("username")
+    userdata = json.loads(r.get(user))
     room = data["room"]
-    requests.post(url_for('game.games'), json=json.dumps(data))
-    print(session.get("room"))
+    userdata["room"] = room
+    r.set(user, json.dumps(userdata))
+    room_data = {"users": {}, "boardstates": ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"], "connectedPlayers": [], "losers": []}
+    r.setnx(room, json.dumps(room_data))
     emit('redirect', url_for('game.game_instance', roomname=room), room = request.sid)
 
 @socketio.on('challengeD')

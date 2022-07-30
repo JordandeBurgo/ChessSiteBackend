@@ -67,5 +67,7 @@ Add a graphic of what pieces have been taken
 
 Add option to rejoin a game you're in on the play tab
 
+Add observe button next to where you can challenge a user
+
 BUG: When you scroll down the page there is some errors with highlighting the correct squares when dragging a piece
 BUG: People arent always logged out when disconnected meaning the online people list sometimes has the same persons multiple times
