@@ -70,6 +70,7 @@ def moved(move):
 @socketio.on('movedone', namespace='/game')
 def movedone(board):
     room = session.get('room')
+    print(room)
     room_data = json.loads(r.get(room))
     if room_data['boardstates'][-1] != board['board']:
         room_data['boardstates'].append(board['board'])
