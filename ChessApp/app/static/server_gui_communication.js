@@ -492,7 +492,7 @@ function socket_handle(){
         bold = document.createElement('strong');
         if(player == 1){
             playerTitleName = document.createTextNode("BLACK");
-            GameBoard.BoardFlipped ^= 1;
+            GameBoard.BoardFlipped = BOOL.TRUE;
             flipCoords();
         }
         else if(player == 0){
@@ -505,6 +505,7 @@ function socket_handle(){
         bold.appendChild(playerTitleName);
         playerTitle.appendChild(text);
         playerTitle.appendChild(bold);
+        console.log("HI THIS HAPPENED SETPLAYER HAPPENED");
     });
 
     socket.on('setUsername', function(data){
