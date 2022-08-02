@@ -24,6 +24,7 @@
                 let btn = document.createElement("button");
                 btn.innerHTML = "Rejoin!";
                 btn.onclick = function () {
+                    console.log(room);
                     window.location.href = "{{ url_for('game.game_instance', roomname=room) }}";
                 }
                 div.appendChild(text);
