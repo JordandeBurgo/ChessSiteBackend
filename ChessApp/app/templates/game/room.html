@@ -18,13 +18,14 @@
         <script>
             socketg.emit('roompage', {});
             socketg.on('roomsin', function(data){
+                let room = data["rooms"][0];
                 let div = document.getElementById("rooms");
-                let text = document.createTextNode(data["rooms"][0]);
+                let text = document.createTextNode(room);
                 let btn = document.createElement("button");
                 btn.innerHTML = "Rejoin!";
-                //btn.onclick = function () {
-                //    
-                //}
+                btn.onclick = function () {
+                    window.location.href = "{{ url_for('game.game_instance', roomname=room) }}";
+                }
                 div.appendChild(text);
                 div.appendChild(btn);
             });
