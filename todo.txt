@@ -44,7 +44,7 @@ Ability to add friends
 
 Profile page
 
-Make it so challenges create random rooms rather than the user choosing a room name
+//Make it so challenges create random rooms rather than the user choosing a room name
 
 Confirm email address for signup
 

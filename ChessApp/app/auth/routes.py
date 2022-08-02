@@ -21,7 +21,7 @@ def register():
             error = 'Password is required.'
         
         if error is None:
-            user_info = {"username": email, "password": generate_password_hash(password), "challenges": []}
+            user_info = {"username": email, "password": generate_password_hash(password), "challenges": [], "room": []}
             setuser = r.setnx(email, json.dumps(user_info))
             if setuser == 0:
                 error = f"User {email} is already registered."
