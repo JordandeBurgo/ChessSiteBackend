@@ -32,6 +32,10 @@ def games():
 @game.route('/game/<roomname>')
 def game_instance(roomname):
     session['room'] = roomname
+    username = session.get('username')
+    user_info = json.loads(r.get(username))
+    user_info["room"] = [roomname]
+    r.set(username, json.dumps(user_info))
     if(session.get('username') is not None):
         #todo: Check whether the user is 1 of the first 2 to join. I.e. one of the 2 players
         return render_template('game/game.html', session=session)
