@@ -95,3 +95,8 @@ def challengeDecline(data):
     if userf in user["challenges"]:
         user["challenges"].remove(userf)
         r.set(usert, json.dumps(user))
+
+@socketio.on('roompage')
+def rooms(data):
+    rooms = json.loads(r.get(session.get('username')))["room"]
+    emit('roomsin', {"rooms": rooms}, room=request.sid)

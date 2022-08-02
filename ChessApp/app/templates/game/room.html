@@ -11,5 +11,23 @@
         <input type="text" id="room" name="room" class="form-control" placeholder="Room" required><br>
         <button value="submit">Start Game</button>
         </form>
+
+        <div id="rooms">
+
+        </div>
+        <script>
+            socketg.emit('roompage', {});
+            socketg.on('roomsin', function(data){
+                let div = document.getElementById("rooms");
+                let text = document.createTextNode(data["rooms"][0]);
+                let btn = document.createElement("button");
+                btn.innerHTML = "Rejoin!";
+                btn.onclick = function () {
+                    window.location.href = "{{ url_for('game.game_instance', roomname=data['rooms'][0]) }}";
+                }
+                div.appendChild(text);
+                div.appendChild(btn);
+            });
+        </script>
     </body>
 {% endblock content %}
