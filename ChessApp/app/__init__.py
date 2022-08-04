@@ -54,14 +54,14 @@ def test_disconnect():
         username = session.get("username")
         user_info = json.loads(r.get(username))
         if len(user_info["room"])>0:
-            room_name = user_info["room"]
+            room_name = user_info["room"][0]
             room_info = json.loads(r.get(room_name))
             if room_info["users"][username] != -1:
                 if len(room_info["connectedPlayers"]) == 0 or (len(room_info["connectedPlayers"]) == 1 and room_info["connectedPlayers"][0] == username):
                     users_to_send = room_info["users"]
                     for user in list(users_to_send.keys()):
                         if user != username:
-                            users = r.get("users")
+                            users = json.loads(r.get("users"))
                             sid = users[user]
                             emit("roomclose", {}, room=sid)
                     user_info["room"] = []
