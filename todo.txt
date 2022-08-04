@@ -66,6 +66,8 @@ Add something to allow you to view previous games you have played
 Add a graphic of what pieces have been taken
 
 Add option to rejoin a game you're in on the play tab
+ - Remove room from user when they leave
+ - Undefined, check if the room list actually has anything in it before trying to display a room 
 
 Add observe button next to where you can challenge a user
 
