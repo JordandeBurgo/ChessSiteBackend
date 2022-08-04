@@ -50,6 +50,22 @@ def test_connect(data):
 def test_disconnect():
     print("Client Disconnected")
     if session.get("username") is not None:
+
+        username = session.get("username")
+        user_info = json.loads(r.get(username))
+        if len(user_info["room"])>0:
+            room_name = user_info["room"]
+            room_info = json.loads(r.get(room_name))
+            if room_info["users"][username] != -1:
+                if len(room_info["connectedPlayers"]) == 0 or (len(room_info["connectedPlayers"]) == 1 and room_info["connectedPlayers"][0] == username):
+                    users_to_send = room_info["users"]
+                    for user in list(users_to_send.keys()):
+                        if user != username:
+                            users = r.get("users")
+                            sid = users[user]
+                            emit("roomclose", {}, room=sid)
+                    user_info["room"] = []
+                    r.set(username, json.dumps(user_info))
         userlist = json.loads(r.get("users"))
         del userlist[session.get('username')]
         r.set("users", json.dumps(userlist))
