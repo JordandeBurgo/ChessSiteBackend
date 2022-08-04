@@ -15,6 +15,7 @@
         <div id="rooms">
 
         </div>
+        <script src="/static/jquery-3.6.0.min.js"></script>
         <script>
             socketg.emit('roompage', {});
             socketg.on('roomsin', function(data){
@@ -29,6 +30,9 @@
                 }
                 div.appendChild(text);
                 div.appendChild(btn);
+            });
+            socketg.on('roomclose', function(data){
+                $("#rooms").empty();
             });
         </script>
     </body>
